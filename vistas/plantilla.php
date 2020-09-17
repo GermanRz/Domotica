@@ -115,6 +115,20 @@
 
                 include 'vistas/modulos/'.$_GET["vista"].'.php';
 
+<<<<<<< HEAD
+=======
+            if ($_GET["vista"] == "inicio"||
+                $_GET["vista"] == "usuarios"||
+                $_GET["vista"] == "serviciosPublicos"||
+                $_GET["vista"] == "temperatura"||
+                $_GET["vista"] == "puertas"||
+                $_GET["vista"] == "ventanas"||
+                $_GET["vista"] == "salir"||
+                $_GET["vista"] == "iluminacion" ||
+                $_GET["vista"] == "ModuloReportes") {
+              
+              include 'vistas/modulos/'.$_GET["vista"].'.php';
+>>>>>>> 721e6063110d32e1ea5cd4edba47f8eef3648a7a
 
               }else{
 
