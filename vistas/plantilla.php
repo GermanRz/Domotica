@@ -91,12 +91,16 @@ session_start();
   <!-- sweetalert 2 theme dark -->
   <!-- <script src="sweetalert2/dist/sweetalert2.min.js"></script> -->
 
+  
+
 
   <!-- bootstrap color picker -->
   <script src="vistas/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
   <!-- OPTIONAL SCRIPTS -->
   <script src="vistas/plugins/chart.js/Chart.js"></script>
+  <!-- ChartJS -->
+  <script src="./vistas/js/GraficasVentanas.js"></script>
   <script src="vistas/dist/js/demo.js"></script>
   <script src="vistas/dist/js/pages/dashboard3.js"></script>
 
@@ -153,7 +157,8 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok") {
         $_GET["vista"] == "puertas" ||
         $_GET["vista"] == "ventanas" ||
         $_GET["vista"] == "salir" ||
-        $_GET["vista"] == "iluminacion"
+        $_GET["vista"] == "iluminacion" ||
+        $_GET["vista"] == "informeVentanas"
       ) {
 
         include 'vistas/modulos/' . $_GET["vista"] . '.php';
@@ -189,7 +194,7 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok") {
   <script src="./vistas/js/plantilla.js"></script>
   <script src="./vistas/js/usuario.js"></script>
   <script src="./vistas/js/ventana.js"></script>
-<!-- <script src="./vistas/js/serviciosP.js"></script> -->
+  <!-- <script src="./vistas/js/serviciosP.js"></script> -->
 </body>
 
 </html>

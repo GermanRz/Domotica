@@ -44,10 +44,65 @@
         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalProgramarVentana">
           <i class="far fa-calendar-alt"></i>
         </button>
-
       </div>
-
     </div>
+    <!-- Opciones de ver y agregar -->
+
+        <div class="container-fluid" style="background: #343a40; color:#fff;">
+
+          <!-- Tarjeta para las opciones -->
+
+          <div class="card" style="background: #343a40; color:#fff;">
+
+              <!-- Cuerpo de la tarjeta -->
+
+              <div class="card-body">
+                
+                <div class="row">
+
+                  <!-- Tarjeta ver informe -->
+
+                  <div class="col-lg-6 col-6">
+
+                    <div class="small-box bg-info">
+
+                      <div class="inner">
+
+                        <h3>Ver Informe ventanas</h3>
+
+                        <p>General</p>
+
+                      </div>
+
+                      <div class="icon">
+
+                        <i class="far fa-eye"></i>
+
+                      </div>
+
+                      <a href="informeVentanas" class="small-box-footer">
+
+                        Ver
+
+                        <i class="fas fa-arrow-circle-right"></i>
+
+                      </a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+          </div>
+
+        </div>
+
+        <!-- Fin tarjeta ver y agregar -->
+
+        <!-- Tarjeta para la tabla -->
 
     <div class="card-body" style="background: #6c757d; color:#fff;">
 
@@ -504,8 +559,7 @@
 
 
           </div>
-          </div>
-
+    
         </div>
 
         <?php
