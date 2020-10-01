@@ -113,7 +113,7 @@ session_start();
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" style="background: #6c757d;">
   <!-- Site wrapper -->
 
 
@@ -126,9 +126,6 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok") {
   $editarSession -> ctrActualizarSession();
   
   echo '<div class="wrapper">';
-
-
-    echo '<div class="wrapper">';
 
     /*=============================================
        =            CABEZOTE            =
