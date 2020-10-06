@@ -67,24 +67,31 @@
                 '.$value["nombre"].'
               </td>
 
-              <!-- TEMPERATURA -->
-              <td>
-                <div class="d-flex justify-content-center">                
+                <td class="align-middle text-center">
+                  <div class="d-flex justify-content-center">                
                   '.$value["temp"].'°C
-                </div>                
-                <div class="d-flex justify-content-center">
-                  <button class="btn btn-success btn-xs btnActivar">Activado</button>
-                </div>              
-              </td>
+                  </div>
+                  <div class="d-flex justify-content-center">';
+                    if ($value["estado_temp"] == 1) {
+                      echo '<button class="btn btn-success btn-xs btnActivarTemp" idTemperatura="'.$value["id"].'" estadoTemp="0">Activado</button>';
+                    }else{
+                      echo '<button class="btn btn-danger btn-xs btnActivarTemp" idTemperatura="'.$value["id"].'" estadoTemp="1">Desactivado</button>';
+                    }echo'
+                  </div>
+                </td>
               
               <!-- HUMEDAD -->
               <td>
                 <div class="d-flex justify-content-center"> 
                   '.$value["hum"].'%
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button class="btn btn-success btn-xs btnActivar">Activado</button>
-                </div>              
+                <div class="d-flex justify-content-center">'; 
+                  if ($value["estado_hum"] == 1) {
+                    echo '<button class="btn btn-success btn-xs" estadoHum="0">Activado</button>';
+                  }else{
+                    echo '<button class="btn btn-danger btn-xs" estadoHum="1">Desactivado</button>';
+                  }echo'
+                </div>                              
               </td>
               
               <!-- GASES -->
@@ -92,8 +99,12 @@
                 <div class="d-flex justify-content-center"> 
                   '.$value["tvo"].'%
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button class="btn btn-success btn-xs btnActivar">Activado</button>
+                <div class="d-flex justify-content-center">'; 
+                  if ($value["estado_tvo"] == 1) {
+                    echo '<button class="btn btn-success btn-xs" estadoTvo="0">Activado</button>';
+                  }else{
+                    echo '<button class="btn btn-danger btn-xs" estadoTvo="1">Desactivado</button>';
+                  }echo'
                 </div>              
               </td>
 
@@ -110,7 +121,7 @@
                 </div>
               </td>
             <tr>';
-        }
+          }
 
         ?>
         </tbody>
@@ -122,7 +133,7 @@
 <!-- /.content-wrapper -->
 
 <!-- MODAL EDITAR-->
-<div class="modal fade" id="editar">
+<div class="modal fade" id="editar">-
   <div class="modal-dialog">
     <div class="modal-content" style="background: #343a40; color:#fff;">
       <form role="form" method="post" enctype="multipart/form-data">
@@ -154,24 +165,89 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                 </div>
-                <input type="text" class="form-control input-lg" name="editarCuarto" id="editarCuarto"  required>
+                <input type="text" class="form-control input-lg" name="editarCuarto" id="editarCuarto" required>
               </div>
             </div>
           </div>
 
-          <!-- Modificar Rango temperatura -->
-          <div class="box-body">
-            <h6>Ingrese el rango de alarmas de temperatura</h6>
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+          <br>
+          <h5>Modificar los valores para las alarmas</h5>
+          <br>
+
+          <!-- RANGOS -->
+          <dl class="row">
+            <dt class="col-sm-4">Temperatura</dt>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-minus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="editarMinTemp" id="editarMinTemp" 
+                  required>
                 </div>
-                <input type="text" class="form-control input-lg" name="editarCuarto" id="editarCuarto"  required>
-              </div>
-            </div>
+              </div>              
+            </dd>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-plus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="editarMaxTemp" id="editarMaxTemp"
+                   required>
+                </div>
+              </div>              
+            </dd>
 
-          </div>
+            <dt class="col-sm-4">Humedad</dt>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-minus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="editarMinHum" id="editarMinHum"
+                   required>
+                </div>
+              </div>              
+            </dd>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-plus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="editarMaxHum" id="editarMaxHum"
+                   required>
+                </div>
+              </div>              
+            </dd>
+
+            <dt class="col-sm-4">Gas</dt>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-minus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="editarMinGas" id="editarMinGas"
+                   required>
+                </div>
+              </div>              
+            </dd>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-plus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="editarMaxGas" id="editarMaxGas"
+                   required>
+                </div>
+              </div>              
+            </dd>
+          </dl>
 
           <!-- <div class="box-body">
 
@@ -224,11 +300,11 @@
 
         <?php
 
-            $registro = new temperaturaControlador();
+          $registro = new temperaturaControlador();
 
-            $registro->ctrEditarTemperatura();
+          $registro->ctrEditarTemperatura();
 
-          ?>
+        ?>
 
       </form>
     </div>
@@ -269,8 +345,8 @@
           <h5>Establezca los valores para alarmas</h5>
           <br>
 
+          <!-- RANGOS -->
           <dl class="row">
-
             <dt class="col-sm-4">Temperatura</dt>
             <dd class="col-sm-4">
               <div class="form-group">              
@@ -343,45 +419,6 @@
               </div>              
             </dd>
           </dl>
-
-          <!-- <div class="box-body">
-            <h6>Ingrese la temperatura actual</h6>
-            <div class="form-group">              
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-                </div>
-                <input type="text" class="form-control input-lg" name="temp"
-                placeholder="Ingresar Nombre" required>
-              </div>
-            </div>
-          </div><br>
-
-          <div class="box-body">
-            <h6>Ingrese la humedad actual</h6>
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-                </div>
-                <input type="text" class="form-control input-lg" name="hum"
-                placeholder="Ingresar Nombre" required>
-              </div>
-            </div>
-          </div><br>
-
-          <div class="box-body">
-            <h6>Ingrese el porcentaje de gases actual</h6>
-            <div class="form-group">              
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-                </div>
-                <input type="text" class="form-control input-lg" name="tvo"
-                placeholder="Ingresar Nombre" required>
-              </div>
-            </div>
-          </div> -->
 
         </div>
 
