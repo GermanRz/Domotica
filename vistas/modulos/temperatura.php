@@ -32,7 +32,7 @@
   <section class="content">
 
     <div class="card-body table-responsive">
-      <table class="table table-bordered table-striped table-hover table-dark tablas">        
+      <table class="table table-bordered table-striped table-hover table-dark  tablas">        
         <thead class="thead-dark">          
           <tr>
             <th>id</th>
@@ -59,54 +59,54 @@
             '<tr>
 
               <td class="align-middle text-center">
-                <h3>'.$value["id"].'</h1> 
+                '.$value["id"].' 
               </td>
 
               <!-- NOMBRE -->
               <td class="align-middle text-center">
-                <h3>'.$value["nombre"].'</h1> 
+                '.$value["nombre"].'
               </td>
 
               <!-- TEMPERATURA -->
               <td>
-                <div class="bg-primary text-white text-center">
-                  <h2 class="display-4">'.$value["temp"].'C°</h2>
-                </div>
+                <div class="d-flex justify-content-center">                
+                  '.$value["temp"].'°C
+                </div>                
                 <div class="d-flex justify-content-center">
-                  <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                  <button class="btn btn-success btn-xs btnActivar">Activado</button>
                 </div>              
               </td>
               
               <!-- HUMEDAD -->
               <td>
-                <div class="bg-primary text-white text-center">
-                  <h2 class="display-4">'.$value["hum"].'%</h2>
+                <div class="d-flex justify-content-center"> 
+                  '.$value["hum"].'%
                 </div>
                 <div class="d-flex justify-content-center">
-                  <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                  <button class="btn btn-success btn-xs btnActivar">Activado</button>
                 </div>              
               </td>
               
               <!-- GASES -->
               <td>
-                <div class="bg-primary text-white text-center">
-                  <h2 class="display-4">'.$value["tvo"].'%</h2>
+                <div class="d-flex justify-content-center"> 
+                  '.$value["tvo"].'%
                 </div>
                 <div class="d-flex justify-content-center">
-                  <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                  <button class="btn btn-success btn-xs btnActivar">Activado</button>
                 </div>              
               </td>
 
               <!-- BOTONES -->
               <td>
-                <a class="btn btn-info btnGrafica btn-lg btn-block" href="tempHabitacion" role="button"><i class="fas fa-chart-bar"></i></a>
-
                 <div class="btn-group btn-block">
-                  <button class="btn btn-info btnPermiso" data-toggle="modal" data-target="#permisos"><i class="fas fa-users-cog"></i></button>
+                  <a class="btn btn-outline-light btnGrafica" href="tempHabitacion" role="button"><i class="fas fa-chart-bar"></i></a>
 
-                  <button class="btn btn-warning btnEditarTemperatura" idTemperatura="'.$value["id"].'" data-toggle="modal" data-target="#editar"><i class="fas fa-bell"></i></button>
+                  <button class="btn btn-outline-info btnPermiso" data-toggle="modal" data-target="#permisos"><i class="fas fa-users-cog"></i></button>
 
-                  <button class="btn btn-danger btnEliminar" idCuarto="'.$value["id"].'""><i class="fas fa-times"></i></button>
+                  <button class="btn btn-outline-warning btnEditarTemperatura" idTemperatura="'.$value["id"].'" data-toggle="modal" data-target="#editar"><i class="fas fa-pen"></i></button>
+
+                  <button class="btn btn-outline-danger btnEliminar" idCuarto="'.$value["id"].'""><i class="fas fa-times"></i></button>
                 </div>
               </td>
             <tr>';
@@ -121,7 +121,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-<!-- MODAL EDITAR Y NOTI-->
+<!-- MODAL EDITAR-->
 <div class="modal fade" id="editar">
   <div class="modal-dialog">
     <div class="modal-content" style="background: #343a40; color:#fff;">
@@ -133,111 +133,93 @@
           </button>
         </div>
         <div class="modal-body" style="background: #424242; color:#fff;">
+
+          <!-- ID habitacion -->
           <div class="box-body">
-
             <div class="form-group">
-
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="idActual" id="idActual" required readonly>
-
               </div>
-
             </div>
-
           </div>
-          <!-- Mmodifikar nombre -->
+
+          <!-- Modificar nombre -->
           <div class="box-body">
-
+            <h6>Ingrese el nombre de la habitación</h6>
             <div class="form-group">
-
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="editarCuarto" id="editarCuarto"  required>
-
               </div>
+            </div>
+          </div>
 
+          <!-- Modificar Rango temperatura -->
+          <div class="box-body">
+            <h6>Ingrese el rango de alarmas de temperatura</h6>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                </div>
+                <input type="text" class="form-control input-lg" name="editarCuarto" id="editarCuarto"  required>
+              </div>
             </div>
 
           </div>
 
-          <div class="box-body">
+          <!-- <div class="box-body">
+
             <h6>Ingrese la temperatura actual</h6>
-            <div class="form-group">
-              
+            <div class="form-group">              
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="editarTemp" id="editarTemp"  required>
-
               </div>
-
             </div>
+
           </div><br>
 
           <div class="box-body">
+
             <h6>Ingrese la humedad actual</h6>
             <div class="form-group">
-
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="editarHum" id="editarHum"  required>
-
               </div>
-
             </div>
+
           </div><br>
 
           <div class="box-body">
+
             <h6>Ingrese el porcentaje de gases actual</h6>
-            <div class="form-group">
-              
+            <div class="form-group">              
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="editarTvo" id="editarTvo"  required>
-
               </div>
-
             </div>
-          </div>
+
+          </div> -->
 
         </div>
 
         <div class="modal-footer" style="background: #343a40; color:#fff;">
-
             <button type="submit" class="btn btn-dark">guardar</button>
-
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-
         </div>
 
         <?php
@@ -268,96 +250,144 @@
           </button>
         </div>
         <div class="modal-body" style="background: #424242; color:#fff;">
-          <!-- Mmodifikar nombre -->
+
+          <!-- Ingresar nombre -->
           <div class="box-body">
-
+            <h5>Ingrese el nombre de la habitación</h5>
             <div class="form-group">
-
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="nuevoCuarto"
                 placeholder="Ingresar Nombre" required>
-
               </div>
-
             </div>
-
           </div>
 
-          <div class="box-body">
-            <h6>Ingrese la temperatura actual</h6>
-            <div class="form-group">
-              
-              <div class="input-group">
+          <br>
+          <h5>Establezca los valores para alarmas</h5>
+          <br>
 
-                <div class="input-group-prepend">
+          <dl class="row">
 
-                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
+            <dt class="col-sm-4">Temperatura</dt>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-minus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="minTemp"
+                  placeholder="Min" required>
                 </div>
+              </div>              
+            </dd>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-plus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="maxTemp"
+                  placeholder="Max" required>
+                </div>
+              </div>              
+            </dd>
 
+            <dt class="col-sm-4">Humedad</dt>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-minus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="minHum"
+                  placeholder="Min" required>
+                </div>
+              </div>              
+            </dd>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-plus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="maxHum"
+                  placeholder="Max" required>
+                </div>
+              </div>              
+            </dd>
+
+            <dt class="col-sm-4">Gas</dt>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-minus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="minGas"
+                  placeholder="Min" required>
+                </div>
+              </div>              
+            </dd>
+            <dd class="col-sm-4">
+              <div class="form-group">              
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-plus-square"></i></span>
+                  </div>
+                  <input type="text" class="form-control input-lg" name="maxGas"
+                  placeholder="Max" required>
+                </div>
+              </div>              
+            </dd>
+          </dl>
+
+          <!-- <div class="box-body">
+            <h6>Ingrese la temperatura actual</h6>
+            <div class="form-group">              
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                </div>
                 <input type="text" class="form-control input-lg" name="temp"
                 placeholder="Ingresar Nombre" required>
-
               </div>
-
             </div>
           </div><br>
 
           <div class="box-body">
             <h6>Ingrese la humedad actual</h6>
             <div class="form-group">
-
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="hum"
                 placeholder="Ingresar Nombre" required>
-
               </div>
-
             </div>
           </div><br>
 
           <div class="box-body">
             <h6>Ingrese el porcentaje de gases actual</h6>
-            <div class="form-group">
-              
+            <div class="form-group">              
               <div class="input-group">
-
                 <div class="input-group-prepend">
-
                   <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-
                 </div>
-
                 <input type="text" class="form-control input-lg" name="tvo"
                 placeholder="Ingresar Nombre" required>
-
               </div>
-
             </div>
-          </div>
+          </div> -->
 
         </div>
 
         <div class="modal-footer" style="background: #343a40; color:#fff;">
-
             <button type="submit" class="btn btn-dark">Agregar</button>
-
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-
         </div>
 
         <?php
@@ -388,32 +418,35 @@
       </div>
       <div class="modal-body" style="background: #424242; color:#fff;" >
         <div class="table-responsive">
-          <table class="table" >
-            <caption>Permisos para administar los controles de la habitacion</caption>
+          <table class="table table-striped table-dark table-bordered table-hover" >
+            <caption>Tabla para modificar los permisos de controlar la habitacion y las notificaciones</caption>
             <thead>
               <tr>
+                <th scope="col">Habitacion</th>
                 <th scope="col">Usuario</th>
-                <th scope="col">Permiso</th>
+                <th scope="col">Persmiso controles</th>
+                <th scope="col">Permiso notificaciones</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">David</th>
+                <th scope="row">Fabian</th>
+                <td>Administrador</td>
+                <td><button class="btn btn-success btn-xs" idUsuario="">Activado</button></td>
                 <td><button class="btn btn-success btn-xs" idUsuario="">Activado</button></td>
               </tr>
               <tr>
-                <th scope="row">Edwin</th>
-                <td><button class="btn btn-danger btn-xs" idUsuario="">Desactivado</button></td>
-              </tr>
+                <th scope="row">Fabian</th>
+                <td>Fabian</td>
+                <td><button class="btn btn-success btn-xs" idUsuario="">Activado</button></td>
+                <td><button class="btn btn-success btn-xs" idUsuario="">Activado</button></td>
+              </tr>              
             </tbody>
           </table>
-        </div>    
-
+        </div>
         <div class="form-check">
-
         </div>
       </div>
-
       <div class="modal-footer justify-content-between" style="background: #333; color: #888;">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary">Guardar</button>

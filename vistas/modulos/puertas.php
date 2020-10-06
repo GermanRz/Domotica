@@ -74,8 +74,11 @@
                                 $valor = null; 
                                 $puertas = PuertasControlador::ctrContarPuerta($item, $valor);
                                   foreach ($puertas as $key => $value) {
+
+                                    echo'<h3>'.$value.'</h3>';
+
                                   }
-                                  echo'<h3>'.$value.'</h3>';
+                                  
                                 ?>
                               <p>Numero de puertas </p>
                             </div>

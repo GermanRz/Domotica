@@ -11,12 +11,8 @@
 	require_once "./controlador/temperaturaControlador.php";
 	require_once "./controlador/ventanasControlador.php";
 	require_once "./controlador/usuarioControlador.php";
-<<<<<<< HEAD
 	require_once "./controlador/ModuloReportesControlador.php";
-
-=======
 	require_once "./controlador/iluminacionControlador.php";
->>>>>>> 84a51170c0a45cb643a18f5d9dcaad8f02745fdc
 
 
 	/*=============================================
@@ -29,13 +25,10 @@
 	require_once "./modelo/temperaturaModelo.php";
 	require_once "./modelo/ventanasModelo.php";
 	require_once "./modelo/usuarioModelo.php";
-<<<<<<< HEAD
 	require_once "./modelo/ModuloReportesModelo.php";
-=======
 	require_once "./modelo/iluminacionModelo.php";
 
 
->>>>>>> 84a51170c0a45cb643a18f5d9dcaad8f02745fdc
 
 	$plantilla = new PlantillaControlador();
 

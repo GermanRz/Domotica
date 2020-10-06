@@ -1,6 +1,6 @@
 // Grafico de Temperatura
 var ctxHu = document.getElementById('GrafHum',).getContext('2d');
-var chart = new Chart(ctxHu, {
+var chart = new Chart(ctxHum, {
     // The type of chart we want to create
     type: 'line',
 

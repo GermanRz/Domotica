@@ -111,10 +111,10 @@
                     $_GET["vista"] == "ventanas"||
                     $_GET["vista"] == "salir"||
                     $_GET["vista"] == "iluminacion" ||
-                    $_GET["vista"] == "ModuloReportes") {
+                    $_GET["vista"] == "ModuloReportes" ||
+                    $_GET["vista"] == "tempHabitacion") {
                   
                   include 'vistas/modulos/'.$_GET["vista"].'.php';
-    // >>>>>>> 721e6063110d32e1ea5cd4edba47f8eef3648a7a
 
                   }else{
 
@@ -135,12 +135,6 @@
         include "vistas/modulos/login.php";
 
       }
-
-      if($_GET["vista"] == "serviciosPublicos"){
-
-        echo '<script src="./vistas/js/serviciosP.js"></script>';
-      }
-
     ?>
 
 
@@ -150,6 +144,7 @@
     <script src="vistas/js/temperatura.js"></script>
     <script src="vistas/js/knob.js"></script>
     <script src="vistas/js/boostrapSlider.js"></script>
+    <script src="./vistas/js/serviciosP.js"></script>
 
 
     <script src="vistas/js/GrafTemperatura.js"></script>
