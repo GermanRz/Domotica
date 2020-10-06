@@ -31,21 +31,6 @@
   </section>
   <!-- Main content -->
   <section class="content">
-
-    <!-- Default box -->
-    <div class="card">
-
-      <div class="card-header" style="background: #343a40; color:#fff;">
-
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAgregarVentana">
-          <i class="fab fa-windows"></i>
-        </button>
-
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalProgramarVentana">
-          <i class="far fa-calendar-alt"></i>
-        </button>
-      </div>
-    </div>
     <!-- Opciones de ver y agregar -->
 
         <div class="container-fluid" style="background: #343a40; color:#fff;">
@@ -62,13 +47,41 @@
 
                   <!-- Tarjeta ver informe -->
 
-                  <div class="col-lg-6 col-6">
+                  <div class="col-lg-4 col-4">
 
                     <div class="small-box bg-info">
 
                       <div class="inner">
 
-                        <h3>Ver Informe ventanas</h3>
+                        <h2>Crear ventanas</h2>
+
+                        <p>General</p>
+
+                      </div>
+
+                      <div class="icon">
+
+                        <i class="far fa-eye"></i>
+
+                      </div>
+
+                      <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modalAgregarVentana">
+
+                        Ver
+
+                        <i class="fas fa-arrow-circle-right"></i>
+
+                      </a>
+
+                    </div>
+
+                  </div>
+                  <div class="col-lg-4 col-4">
+                    <div class="small-box bg-info">
+
+                      <div class="inner">
+
+                        <h2>Informe ventanas</h2>
 
                         <p>General</p>
 
@@ -89,7 +102,34 @@
                       </a>
 
                     </div>
+                  </div>
 
+                  <div class="col-lg-4 col-4">
+                      <div class="small-box bg-info">
+
+                      <div class="inner">
+
+                        <h2>Limpieza Manual</h2>
+
+                        <p>General</p>
+
+                      </div>
+
+                      <div class="icon">
+
+                        <i class="far fa-eye"></i>
+
+                      </div>
+
+                      <a type="button" class="small-box-footer" data-toggle="modal" data-target="#modalProgramarVentana">
+
+                        Ver
+
+                        <i class="fas fa-arrow-circle-right"></i>
+
+                      </a>
+
+                    </div>
                   </div>
 
                 </div>
@@ -195,20 +235,30 @@
       <form role="form" method="post" enctype="multipart/form-data">
         <!-- Modal Header -->
         <div class="modal-header">
-
           <h4 class="modal-title">Limpieza</h4>
+          <button type="button" class="close" style="color:red;" data-dismiss="modal">&times;</button>
         </div>
         <!-- contenido del modal -->
         <div class="modal-body" style="background: #7A7878; color:#fff;">
 
-          <h1>Referencias</h1>
-          <select class="form-control input-lg" name="limpieza">
+          <h1>Referencia</h1>
+          <select class="form-control input-lg" id="limpieza" name="limpieza" required>
 
-            <option value="Administrador">ventana A</option>
+              <option value="">Selecionar Referencia</option>
 
-            <option value="Permanente">ventana B</option>
+              <?php
 
-            <option value="Invitado">ventana C</option>
+              $item = null;
+              $valor = null;
+
+              $limpieza = ventanasControlador::ctrMostrarVentana($item, $valor);
+
+              foreach ($limpieza as $key => $value) {
+
+                echo '<option value="'.$value["referencia"].'">'.$value["referencia"].'</option>';
+              }
+
+              ?>
 
           </select>
           <!--  ================================================================
@@ -217,17 +267,13 @@
           <h1>Intensidad</h1>
 
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary">Limpieza Suave</button>
-            <button type="button" class="btn btn-secondary">Limpieza Profunda</button>
+            <button type="button" class="btn" style="background:#6c757d; color:white">Limpieza Suave</button>
+            <button type="button" class="btn" style="background:#6c757d; color:white">Limpieza Profunda</button>
           </div>
+          <p> </p>
           <!-- Modal footer -->
           <div class="modal-footer" style="background: #343a40; color:#fff;">
-
-            <button type="submit" class="btn" style="background: #3d9970; color:white">Agregar</button>
-
             <button type="button" class="btn" style="background:#d81b60; color:white" data-dismiss="modal">Cancelar</button>
-
-
           </div>
 
         </div>
