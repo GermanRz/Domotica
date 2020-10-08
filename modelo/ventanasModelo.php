@@ -109,6 +109,21 @@ class ventanaModelo
         $stmt = null;
     }
 
+    //METODO PARA TRAER EL HISTORICO DE VENTANAS
+    static public function mdlHistoricoVentanas($tabla){
+
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+         $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        $stmt->close();
+         $stmt = null;
+    }//FIN del metodo de conexion para historico de ventanas
+
+
+
+
     /* ================================================================
          BORRAR Ventana
         ================================================================= */

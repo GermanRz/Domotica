@@ -16,6 +16,21 @@ class ventanasControlador
                     return $respuesta;
                 }
 
+
+
+                // INICIO del metodo para traer el historico de ventanas 
+                static public function ctrHistoricoVentanas(){
+
+                    $tabla ="registro_ventana_limpieza";
+                    $respuesta = ventanaModelo::mdlHistoricoVentanas($tabla);
+                    return $respuesta;
+                } // FIN del metodo para traer el historico de ventanas 
+
+
+
+
+
+
     /* ================================================================
         Registro de usuario
         ================================================================= */

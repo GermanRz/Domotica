@@ -54,7 +54,142 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
+<?php 
+
+  $LabelLimpieza=array();
+  $minutos=array();
+  $respuestaLimpieza = ventanasControlador:: ctrHistoricoVentanas();
+
+  //var_dump($respuestaLimpieza);
+
+  foreach ($respuestaLimpieza as $key => $value) {
+    array_push($minutos, $value["duracion"]);
+    $hora_ventana = substr($value["fecha_final"],0,);
+    array_push($LabelLimpieza, $hora_ventana);
+  }
+
+
+  var_dump($minutos);
+
+
+
+ ?>
+
+
  
 
 
+  <script>
+    
+ $(function () {
+   
+    var areaChartData = {
+      labels  : [
+          <?php 
 
+            foreach ($LabelLimpieza as $value) {
+              echo "'".$value."',";
+
+            }
+
+           ?>
+          ],
+      datasets: [
+        {
+          label: 'Limpieza profunda',
+          //'Limpieza profunda',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data: [
+            <?php 
+              foreach ($minutos as $key => $value) {
+                echo $value.",";
+              }
+             ?>
+          ]
+        },
+        {
+          labels  : [
+          <?php 
+
+            foreach ($LabelLimpieza as $value) {
+              echo "'".$value."',";
+
+            }
+
+           ?>
+          ],
+          label               : 'Limpieza suave',
+          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          borderColor         : 'rgba(210, 214, 222, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(210, 214, 222, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data: [
+            <?php 
+              foreach ($minutos as $value) {
+                echo $value.",";
+              }
+             ?>
+          ]
+
+        },
+      ]
+    }
+    
+    var areaChartOptions = {
+      maintainAspectRatio : false,
+      responsive : true,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }],
+        yAxes: [{
+          gridLines : {
+            display : false,
+          }
+        }]
+      }
+    }
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = jQuery.extend(true, {}, areaChartData)
+    var temp0 = areaChartData.datasets[0]
+    var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp1
+    barChartData.datasets[1] = temp0
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar', 
+      data: barChartData,
+      options: barChartOptions
+    })
+
+    
+  })
+
+
+  </script>
