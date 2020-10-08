@@ -145,8 +145,5 @@
     <script src="vistas/js/knob.js"></script>
     <script src="vistas/js/boostrapSlider.js"></script>
     <script src="./vistas/js/serviciosP.js"></script>
-    
-    <script src="vistas/js/GrafHum.js"></script>
-
   </body>
 </html>
