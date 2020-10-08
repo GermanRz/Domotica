@@ -16,9 +16,7 @@
 		}
 
 		// MOSTRAR GRAFICO DE TEMPERATURA 
-		static public function ctrHistoricoTemperatura(){
-
-			$tabla = "temp_historicos";
+		static public function ctrHistoricoTemperatura($tabla){			
 
 			$respuesta = temperaturaModelo::mdlHistoricoTemperatura($tabla);
 
