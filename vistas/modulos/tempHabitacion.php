@@ -140,15 +140,15 @@
     </div>  
   </section>
 
-  <!-- GASES -->
+  <!-- TVOC -->
   <section class="content">
     <div class="card">
       <div class="card-header" style="background: #343a40; color:#fff;">
-        <a>Gases</a>
+        <a>TVOC</a>
       </div>       
       <div class="card-body" style="background: #424242;">
         <div class="row">
-          
+          <!-- Control -->
           <div class="col-md-4 text-center">
             <div class="card card-primary">
               <div class="card-header" style="background:#343a40;">
@@ -169,7 +169,7 @@
               </div>
             </div>
           </div>
-          
+          <!-- Grafico TVOC -->
           <div class="col-8">
               <div class="card card-primary">
                 <div class="card-header" style="background:#343a40;">
@@ -191,7 +191,7 @@
 
 
                 </div>
-                
+                <!-- /.card-body -->
               </div>
           </div>
         </div>
@@ -200,175 +200,3 @@
   </section>
 
 </div>
-
-<?php
-  //---- Grafico temperatura----
-  $labelsTemp=array();
-  $temperaturas=array();
-
-  $tabla="temp_historicos";
-
-  $respuestaTemperatura= temperaturaControlador::ctrHistoricoTemperatura($tabla);
-  
-  foreach($respuestaTemperatura as $key => $value){
-    array_push($temperaturas, $value["temperatura"]);
-    $hora_temperatura=substr($value["fecha"],11,5);
-    array_push($labelsTemp, $hora_temperatura);
-  }
-  //---------
-
-  //---- Grafico temperatura----
-  $labelsGas=array();
-  $gases=array();
-
-  $tabla="gas_historicos";
-
-  $respuestaGas= temperaturaControlador::ctrHistoricoTemperatura($tabla);
-  
-  foreach($respuestaGas as $key => $value){
-    array_push($gases, $value["gas"]);
-    $hora_gas=substr($value["fecha"],11,5);
-    array_push($labelsGas, $hora_gas);
-  }
-  //---------
-
-  //---- Grafico humedad----
-  $labelsHum=array();
-  $humedades=array();
-
-  $tabla="hum_historicos";
-
-  $respuestaHum= temperaturaControlador::ctrHistoricoTemperatura($tabla);
-  
-  foreach($respuestaHum as $key => $value){
-    array_push($humedades, $value["humedad"]);
-    $hora_humedad=substr($value["fecha"],11,5);
-    array_push($labelsHum, $hora_humedad);
-  }
-  //---------
-
-
-?>
-
-<script>
-//--------  Grafico de Temperatura --------------
-    var ctxT =$("#GrafTemp").get(0).getContext('2d');
-    var chart = new Chart(ctxT, {
-      type: 'line',
-      data: {
-        labels: [
-          <?php
-            foreach($labelsTemp as $value){
-              echo "'".$value."',";
-            }
-          ?>
-        ],          
-        datasets: [{
-          label: 'Temperatura en grados ºC',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data:[
-            <?php
-              foreach($temperaturas as $key => $value){
-                echo $value.",";
-              }
-            ?>
-          ]
-        }]
-      },
-
-      // Configuration options go here
-      options: {
-        responsive: true,
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItems, data){
-              return tooltipItems.yLabel + '°C';
-            }
-          }
-        }
-      }
-    });
-//----------------
-
-//------------- GRAFICO DE GASES --------------
-    var ctxTv = document.getElementById('GrafTvo',).getContext('2d');
-    var chart = new Chart(ctxTv, {
-      type: 'line',
-      data: {
-        labels:[
-          <?php
-            foreach($labelsGas as $value){
-              echo "'".$value."',";
-            }
-          ?>
-        ],   
-        datasets: [{
-          label: 'Tvoc en %',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [
-            <?php
-              foreach($gases as $key => $value){
-                echo $value.",";
-              }
-            ?>
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItems, data){
-              return tooltipItems.yLabel + '%';
-            }
-          }
-        }
-      }
-    });  
-//----------------
-
-//------------- GRAFICO DE HUMEDAD --------------
-    var ctxHu = document.getElementById('GrafHum',).getContext('2d');
-    var chart = new Chart(ctxHu, {
-      type: 'line',
-      data: {
-        labels: [
-        <?php
-          foreach($labelsHum as $value){
-            echo "'".$value."',";
-          }
-        ?>
-      ],
-        datasets: [{
-          label: 'Humedad en %',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [
-            <?php
-              foreach($humedades as $key => $value){
-                echo $value.",";
-              }
-            ?>
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItems, data){
-              return tooltipItems.yLabel + '%';
-            }
-          }
-        },
-				hover: {
-					mode: 'nearest',
-					intersect: true
-				}
-      }
-    });
-//----------------
-
-</script>

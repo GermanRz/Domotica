@@ -1,5 +1,5 @@
   <div class="content-wrapper" style="background: #6c757d;">
-
+    
     <section class="content-header">
 
       <div class="container-fluid">
@@ -41,14 +41,14 @@
         <div class="card-header" style="background: #343a40;">
 
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalAgregarUsuario">
-              <i class="fas fa-user-plus"></i>
+              Agregar usuario
             </button>
 
         </div>
 
         <div class="card-body" style="background: #adb5bd;">
 
-          <table class="table table-dark table-striped table-hover dt-responsive tablas " style="width:100%">
+          <table class="table table-dark table-striped table-hover dt-responsive tablas ">
 
             <thead>
 
@@ -69,71 +69,70 @@
 
             <tbody>
 
-              <?php
+            <?php 
 
-                $item = null;
-                $valor = null;
-                $numero=0;
+              $item = null;
+              $valor = null;
 
-                $usuarios = usuariosControlador::ctrMostrarUsuario($item, $valor);
+              $usuarios = usuariosControlador::ctrMostrarUsuario($item, $valor);
 
-                foreach ($usuarios as $key => $value) {
-                  $numero++;
-                  echo
-                  '<tr>
+              foreach ($usuarios as $key => $value) {            
 
-                    <td>'.$numero.'</td>
+                echo'<tr>
 
-                    <td>'.$value["nombre"].'</td>
+                        <td>'.$value["id"].'</td>
 
-                    <td>'.$value["usuario"].'</td>';
+                        <td>'.$value["nombre"].'</td>
 
-                    if ($value["foto"] == null) {
+                        <td>'.$value["usuario"].'</td>';
 
-                      echo '<td><img src="images/foto/AdminMaleAvatar.png" class="img-thumbnail" width="40px"></td>';
+                      if ($value["foto"] == null) {
+                          
+                          echo '<td><img src="images/foto/AdminMaleAvatar.png" class="img-thumbnail" width="40px"></td>';
 
-                    } else {
+                      } else {
+                          
+                          echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
 
-                      echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+                      }
+ 
+                        echo '<td>'.$value["perfil"].'</td>';
 
-                    }
+                        if ($value["estado"] == 1) {
 
-                    echo
-                    '<td>'.$value["perfil"].'</td>';
+                          echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
 
-                    if ($value["estado"] == 1) {
+                        }else{
 
-                      echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="0">Activado</button></td>';
+                          echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
 
-                    }else{
+                        }
 
-                      echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["id"].'" estadoUsuario="1">Desactivado</button></td>';
+                        
 
-                    }
+                        echo'<td>'.$value["ultimo_login"].'</td>
 
-                    echo'<td>'.$value["ultimo_login"].'</td>
+                        <td><div class="btn-group">
 
-                    <td>
-                      <div class="btn-group">
+                        <button class="btn btn-dark btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil-alt" style="color:#fff;"></i></button>
 
-                        <button class="btn btn-dark btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal"
-                        data-target="#modalEditarUsuario"><i class="fa fa-pencil-alt" style="color:#fff;"></i></button>
+                        <button class="btn btn-danger btnEliminarUsuario" fotoUsuario="'.$value["foto"].'" idUsuario="'.$value["id"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
+                                            
+                        </div></td>
 
-                        <button class="btn btn-danger btnEliminarUsuario" fotoUsuario="'.$value["foto"].'" idUsuario="
-                        '.$value["id"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
-
-                      </div>
-                    </td>
-
-                  </tr>';
+                      </tr>';
                 }
               ?>
-
+              
             </tbody>
 
           </table>
 
+        
+
         </div>
+
+      
 
         <div class="card-footer" style="background: #343a40; color:#fff;">
 
@@ -153,7 +152,7 @@
 
   <!--  ================================================================
           Modal Agregar Usuario
-      =================================================================  -->
+      =================================================================  --> 
   <!-- The Modal -->
   <div class="modal fade" id="modalAgregarUsuario">
 
@@ -163,6 +162,8 @@
 
         <form role="form" method="post" enctype="multipart/form-data">
 
+
+      
           <!-- Modal Header -->
           <div class="modal-header">
 
@@ -172,136 +173,140 @@
 
           </div>
 
+
+
+          
           <!-- contenido del modal -->
           <div class="modal-body" style="background: #6c757d; color:#fff;">
 
             <!--  ================================================================
-                          INGRESA EL NOMBRE
-            =================================================================  -->
-            <div class="box-body">
+                        INGRESA EL NOMBRE
+            =================================================================  --> 
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <div class="input-group-prepend">
+                    <div class="input-group-prepend">
 
-                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                        <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+
+                    </div>
+
+                        <input type="text" class="form-control input-lg" name="nuevoNombre" placeholder="Ingresar Nombre" required>
 
                   </div>
 
-                  <input type="text" class="form-control input-lg" name="nuevoNombre"
-                  placeholder="Ingresar Nombre" required>
+                </div>
+
+              </div>
+            
+
+          <!--  ================================================================
+                    INGRESA EL USUARIO
+        =================================================================  --> 
+              <div class="box-body">
+
+                <div class="form-group">
+
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+
+                    </div>
+
+                      <input type="text" class="form-control input-lg" id="nuevoUsuario" name="nuevoUsuario" placeholder="Ingresar Nombre" required> 
+
+                  </div>
 
                 </div>
 
               </div>
 
-            </div>
-
             <!--  ================================================================
-                      INGRESA EL USUARIO
-            =================================================================  -->
-            <div class="box-body">
+                INGRESA PASSWORD
+        =================================================================  --> 
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <div class="input-group-prepend">
+                    <div class="input-group-prepend">
 
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      
+                    </div>
+
+                    <input type="password" class="form-control input-lg" name="nuevoPassword" placeholder="Ingresar Contraseña" required>
 
                   </div>
-
-                  <input type="text" class="form-control input-lg" id="nuevoUsuario" name="nuevoUsuario"
-                  placeholder="Ingresar Nombre" required>
 
                 </div>
 
               </div>
 
-            </div>
 
-            <!--  ================================================================
-                  INGRESA PASSWORD
-            =================================================================  -->
-            <div class="box-body">
+        <!--  ================================================================
+                INGRESA PERFIL
+        =================================================================  --> 
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <div class="input-group-prepend">
+                    <div class="input-group-prepend">
 
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      <span class="input-group-text"><i class="fas fa-users"></i></span>
+                      
+                    </div>
+
+                    <select class="form-control input-lg" name="nuevoPerfil">
+
+                      <option value="">Selecionar Perfil</option>
+
+                      <option value="Administrador">Administrador</option>
+
+                      <option value="Permanente">usuario</option>
+
+                      <option value="Invitado">Invitado</option>
+
+                    </select>
 
                   </div>
-
-                  <input type="password" class="form-control input-lg" name="nuevoPassword"
-                  placeholder="Ingresar Contraseña" required>
 
                 </div>
 
               </div>
 
-            </div>
 
-            <!--  ================================================================
-                  INGRESA PERFIL
-            =================================================================  -->
+        <!--  ================================================================
+                INGRESAR FOTO
+        =================================================================  -->
+              <div class="box-body">
 
-            <div class="box-body">
+                <div class="form-group">
 
-              <div class="form-group">
+                  <div class="panel">Subir Foto</div>
 
-                <div class="input-group">
+                  <input type="file" class="nuevaFoto" name="nuevaFoto">
 
-                  <div class="input-group-prepend">
+                  <p class="help-block">Peso maximo 2MB</p>
 
-                    <span class="input-group-text"><i class="fas fa-users"></i></span>
-
-                  </div>
-
-                  <select class="form-control input-lg" name="nuevoPerfil">
-
-                    <option value="">Selecionar Perfil</option>
-
-                    <option value="Administrador">Administrador</option>
-
-                    <option value="Permanente">usuario</option>
-
-                    <option value="Invitado">Invitado</option>
-
-                  </select>
+                  <img src="images/foto/AdminMaleAvatar.png" class="img-thumbnail previsualizar" width="100px">
 
                 </div>
 
-              </div>
-
-            </div>
-
-            <!--  ================================================================
-                  INGRESAR FOTO
-            =================================================================  -->
-            <div class="box-body">
-
-              <div class="form-group">
-
-                <div class="panel">Subir Foto</div>
-
-                <input type="file" class="nuevaFoto" name="nuevaFoto">
-
-                <p class="help-block">Peso maximo 2MB</p>
-
-                <img src="images/foto/AdminMaleAvatar.png" class="img-thumbnail previsualizar" width="100px">
-
-              </div>
-
-            </div>
-
+              </div> 
+            
           </div>
 
+
+          
           <!-- Modal footer -->
           <div class="modal-footer" style="background: #343a40; color:#fff;">
 
@@ -311,26 +316,30 @@
 
           </div>
 
-          <?php
+          <?php 
 
-            $registro = new usuariosControlador();
+          $registro = new usuariosControlador();
 
-            $registro->ctrCrearUsuario();
+          $registro->ctrCrearUsuario();
 
           ?>
 
         </form>
-
+      
       </div>
 
     </div>
 
   </div>
 
+
+
+
+
+
   <!--  ================================================================
           Modal Editar Usuario
-  =================================================================  -->
-
+      =================================================================  --> 
   <!-- The Modal -->
   <div class="modal fade" id="modalEditarUsuario">
 
@@ -340,6 +349,8 @@
 
         <form role="form" method="post" enctype="multipart/form-data">
 
+
+      
           <!-- Modal Header -->
           <div class="modal-header">
 
@@ -349,137 +360,144 @@
 
           </div>
 
+
+
+          
           <!-- contenido del modal -->
           <div class="modal-body" style="background: #6c757d; color:#fff;">
 
             <!--  ================================================================
-                          EDITA EL NOMBRE
-            =================================================================  -->
-            <div class="box-body">
+                        EDITA EL NOMBRE
+            =================================================================  --> 
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <div class="input-group-prepend">
+                    <div class="input-group-prepend">
 
-                      <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                        <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+
+                    </div>
+
+                        <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
 
                   </div>
 
-                  <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+                </div>
+
+              </div>
+            
+
+          <!--  ================================================================
+                    EDITA EL USUARIO
+        =================================================================  --> 
+              <div class="box-body">
+
+                <div class="form-group">
+
+                  <div class="input-group">
+
+                    <div class="input-group-prepend">
+
+                      <span class="input-group-text"><i class="fas fa-user"></i></span>
+
+                    </div>
+
+                      <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="" required readonly> 
+
+                  </div>
 
                 </div>
 
               </div>
 
-            </div>
-
             <!--  ================================================================
-                      EDITA EL USUARIO
-            =================================================================  -->
-            <div class="box-body">
+                EDITA PASSWORD
+        =================================================================  --> 
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <div class="input-group-prepend">
+                    <div class="input-group-prepend">
 
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                      <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      
+                    </div>
+
+                    <input type="password" class="form-control input-lg" id="editarPassword" name="editarPassword" placeholder="ingrese una nueva contraseña">
+
+                    <input type="hidden" id="passwordActual" name="passwordActual">
 
                   </div>
-
-                  <input type="text" class="form-control input-lg" id="editarUsuario"
-                  name="editarUsuario" value="" required readonly>
 
                 </div>
 
               </div>
 
-            </div>
 
-            <!--  ================================================================
-                  EDITA PASSWORD
-            =================================================================  -->
-            <div class="box-body">
+        <!--  ================================================================
+                EDITA PERFIL
+        =================================================================  --> 
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="input-group">
 
-                  <div class="input-group-prepend">
+                    <div class="input-group-prepend">
 
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                      <span class="input-group-text"><i class="fas fa-users"></i></span>
+                      
+                    </div>
+
+                    <select class="form-control input-lg"  name="editarPerfil">
+
+                      <option value="" id="editarPerfil"></option>
+
+                      <option value="Administrador">Administrador</option>
+
+                      <option value="Permanente">usuario</option>
+
+                      <option value="Invitado">Invitado</option>
+
+                    </select>
 
                   </div>
-
-                  <input type="password" class="form-control input-lg" id="editarPassword" name="editarPassword" placeholder="ingrese una nueva contraseña">
-
-                  <input type="hidden" id="passwordActual" name="passwordActual">
 
                 </div>
 
               </div>
 
-            </div>
 
-            <!--  ================================================================
-                  EDITA PERFIL
-            =================================================================  -->
-            <div class="box-body">
+        <!--  ================================================================
+                EDITAR FOTO
+        =================================================================  -->
+              <div class="box-body">
 
-              <div class="form-group">
+                <div class="form-group">
 
-                <div class="input-group">
+                  <div class="panel">Subir Foto</div>
 
-                  <div class="input-group-prepend">
+                  <input type="file" class="nuevaFoto" id="editarFoto" name="editarFoto">
 
-                    <span class="input-group-text"><i class="fas fa-users"></i></span>
+                  <input type="hidden" id="fotoActual" name="fotoActual">
 
-                  </div>
+                  <p class="help-block">Peso maximo 2MB</p>
 
-                  <select class="form-control input-lg"  name="editarPerfil">
-
-                    <option value="" id="editarPerfil"></option>
-
-                    <option value="Administrador">Administrador</option>
-
-                    <option value="Permanente">usuario</option>
-
-                    <option value="Invitado">Invitado</option>
-
-                  </select>
+                        <img src="images/foto/AdminMaleAvatar.png" class="img-thumbnail previsualizar" width="100px">
 
                 </div>
 
-              </div>
-
-            </div>
-
-            <!--  ================================================================
-                  EDITAR FOTO
-            =================================================================  -->
-            <div class="box-body">
-
-              <div class="form-group">
-
-                <div class="panel">Subir Foto</div>
-
-                <input type="file" class="nuevaFoto" id="editarFoto" name="editarFoto">
-
-                <input type="hidden" id="fotoActual" name="fotoActual">
-
-                <p class="help-block">Peso maximo 2MB</p>
-
-                      <img src="images/foto/AdminMaleAvatar.png" class="img-thumbnail previsualizar" width="100px">
-
-              </div>
-
-            </div>
-
+              </div> 
+            
           </div>
 
+
+          
           <!-- Modal footer -->
           <div class="modal-footer" style="background: #343a40; color:#fff;">
 
@@ -489,23 +507,23 @@
 
           </div>
 
-          <?php
+          <?php 
 
-             $editar = new usuariosControlador();
+           $editar = new usuariosControlador();
 
-             $editar->ctrEditarUsuario();
+           $editar->ctrEditarUsuario();
 
-          ?>
+          ?> 
 
         </form>
-
+      
       </div>
 
     </div>
 
   </div>
 
-  <?php
+  <?php 
 
     $borrar = new usuariosControlador();
 
