@@ -58,38 +58,43 @@
 
 <?php 
 
-  $LabelLimpieza=array();
-  $minutos=array();
-  $respuestaLimpieza = ventanasControlador:: ctrHistoricoVentanas();
+  $LabelLimpiezaSuave=array();
+  $LabelLimpiezaProfunda=array();
 
-  //var_dump($respuestaLimpieza);
+  $minutosSuave=array();
+  $minutosProfunda=array();
 
-  foreach ($respuestaLimpieza as $key => $value) {
-    array_push($minutos, $value["duracion"]);
-    $hora_ventana = substr($value["fecha_final"],0,);
-    array_push($LabelLimpieza, $hora_ventana);
+  $item = "tipo_limpieza";
+  $item2 = "id_ventana";
+
+  $respuestaLimpiezaSuave = ventanasControlador:: ctrHistoricoVentanas($item, "SUAVE", $item2, 18);
+
+  $respuestaLimpiezaProfunda = ventanasControlador:: ctrHistoricoVentanas($item, "PROFUNDA",$item2, 18 );
+
+//  var_dump($respuestaLimpieza);
+
+  foreach ($respuestaLimpiezaSuave as $key => $value) {
+    array_push($minutosSuave, $value["duracion"]);
+    $hora_ventana = substr($value["fecha_inicio"],0,);
+    array_push($LabelLimpiezaSuave, $hora_ventana);
   }
 
-
-  var_dump($minutos);
-
-
-
+  foreach ($respuestaLimpiezaProfunda as $key => $value) {
+    array_push($minutosProfunda, $value["duracion"]);
+    $hora_ventana = substr($value["fecha_inicio"],0,);
+    array_push($LabelLimpiezaProfunda, $hora_ventana);
+  }
  ?>
-
-
- 
-
-
   <script>
     
  $(function () {
+
    
     var areaChartData = {
       labels  : [
           <?php 
 
-            foreach ($LabelLimpieza as $value) {
+            foreach ($LabelLimpiezaSuave as $value) {
               echo "'".$value."',";
 
             }
@@ -98,35 +103,8 @@
           ],
       datasets: [
         {
-          label: 'Limpieza profunda',
-          //'Limpieza profunda',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data: [
-            <?php 
-              foreach ($minutos as $key => $value) {
-                echo $value.",";
-              }
-             ?>
-          ]
-        },
-        {
-          labels  : [
-          <?php 
-
-            foreach ($LabelLimpieza as $value) {
-              echo "'".$value."',";
-
-            }
-
-           ?>
-          ],
-          label               : 'Limpieza suave',
+          label: 'Limpieza Suave',
+          //'Limpieza Suave',
           backgroundColor     : 'rgba(210, 214, 222, 1)',
           borderColor         : 'rgba(210, 214, 222, 1)',
           pointRadius         : false,
@@ -136,7 +114,34 @@
           pointHighlightStroke: 'rgba(220,220,220,1)',
           data: [
             <?php 
-              foreach ($minutos as $value) {
+              foreach ($minutosSuave as $key => $value) {
+                echo $value.',';
+              }
+             ?>
+          ]
+        },
+        {
+          labels  : [
+          <?php 
+
+            foreach ($LabelLimpiezaProfunda as $value) {
+              echo "'".$value."',";
+
+            }
+
+           ?>
+          ],
+          label               : 'Limpieza profunda',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data: [
+            <?php 
+              foreach ($minutosProfunda  as $value) {
                 echo $value.",";
               }
              ?>
@@ -171,10 +176,8 @@
     //-------------
     var barChartCanvas = $('#barChart').get(0).getContext('2d')
     var barChartData = jQuery.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
+    var vent0 = areaChartData.datasets[0]
+    barChartData.datasets[0] = vent0 
 
     var barChartOptions = {
       responsive              : true,

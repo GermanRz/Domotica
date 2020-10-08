@@ -6,25 +6,26 @@ class ventanasControlador
     /* ================================================================
         		MOSTRAR Ventana
                 ================================================================= */
-                static public function ctrMostrarVentana($item, $valor)
-                {
+    static public function ctrMostrarVentana($item, $valor)
+    {
 
-                    $tabla = "ventana";
+        $tabla = "ventana";
 
-                    $respuesta = ventanaModelo::mdlMostrarVentana($tabla, $item, $valor);
+        $respuesta = ventanaModelo::mdlMostrarVentana($tabla, $item, $valor);
 
-                    return $respuesta;
-                }
+        return $respuesta;
+    }
 
 
 
-                // INICIO del metodo para traer el historico de ventanas 
-                static public function ctrHistoricoVentanas(){
+    // INICIO del metodo para traer el historico de ventanas 
+    static public function ctrHistoricoVentanas($item, $valor,$item2, $valor2 )
+    {
 
-                    $tabla ="registro_ventana_limpieza";
-                    $respuesta = ventanaModelo::mdlHistoricoVentanas($tabla);
-                    return $respuesta;
-                } // FIN del metodo para traer el historico de ventanas 
+        $tabla = "registro_ventana_limpieza";
+        $respuesta = ventanaModelo::mdlHistoricoVentanas($tabla, $item, $valor, $item2, $valor2);
+        return $respuesta;
+    } // FIN del metodo para traer el historico de ventanas 
 
 
 
@@ -34,94 +35,93 @@ class ventanasControlador
     /* ================================================================
         Registro de usuario
         ================================================================= */
-        static public function ctrCrearVentana()
-        {
+    static public function ctrCrearVentana()
+    {
 
-            if (isset($_POST["nuevaReferencia"])) {
+        if (isset($_POST["nuevaReferencia"])) {
 
             /*=============================================
 							=            VALIDAR IMAGEN           =
 							=============================================*/
 
-							$ruta = "";
-                            if (isset($_FILES["nuevaFoto"]["tmp_name"])) {
-    
-                                list($ancho,$alto)=getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-    
-                                $nuevoAncho = 500;
-                                $nuevoAlto = 500;
-    
-                                /*=============================================
+            $ruta = "";
+            if (isset($_FILES["nuevaFoto"]["tmp_name"])) {
+
+                list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+
+                $nuevoAncho = 500;
+                $nuevoAlto = 500;
+
+                /*=============================================
                                  Directorio de la Foto
                                  =============================================*/
-                                $directorio = "images/ventanas/".$_POST["nuevaReferencia"];
-    
-                                mkdir($directorio, 0755);
-    
-                                /*=============================================
+                $directorio = "images/ventanas/" . $_POST["nuevaReferencia"];
+
+                mkdir($directorio, 0755);
+
+                /*=============================================
                                 Guardar la imagen segun su Formato
                                 =============================================*/
-    
-                                if ($_FILES["nuevaFoto"]["type"] == "image/jpeg") {
-    
-                                    /*=============================================
+
+                if ($_FILES["nuevaFoto"]["type"] == "image/jpeg") {
+
+                    /*=============================================
                                     Guardar Formato JPG en Directorio
-                                    =============================================*/ 
-    
-                                    $aleatorio = mt_rand(100,999);
-    
-                                    $ruta = "images/ventanas/".$_POST["nuevaReferencia"]."/".$aleatorio.".jpg";
-    
-                                    $origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-    
-                                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-    
-                                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho,$alto);
-    
-                                    imagejpeg($destino,$ruta);
-                                }
-    
-                                if ($_FILES["nuevaFoto"]["type"] == "image/png") {
-    
-                                    /*=============================================
+                                    =============================================*/
+
+                    $aleatorio = mt_rand(100, 999);
+
+                    $ruta = "images/ventanas/" . $_POST["nuevaReferencia"] . "/" . $aleatorio . ".jpg";
+
+                    $origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
+
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                    imagejpeg($destino, $ruta);
+                }
+
+                if ($_FILES["nuevaFoto"]["type"] == "image/png") {
+
+                    /*=============================================
                                     Guardar Formato PNG en Directorio
                                     =============================================*/
-    
-                                    $aleatorio = mt_rand(100,999);
-    
-                                    $ruta = "images/ventanas/".$_POST["nuevaReferencia"]."/".$aleatorio.".png";
-    
-                                    $origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-    
-                                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-    
-                                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho,$alto);
-    
-                                    imagepng($destino,$ruta);
-                                }
-    
-                            }
 
-         $tabla = "ventana";
+                    $aleatorio = mt_rand(100, 999);
 
-         $datos = array(
-            "referencia" => $_POST["nuevaReferencia"],
-            "ubicacion" => $_POST["nuevaUbicacion"],
-            "usuario_permitidos" => $_POST['nuevoUsuarioPermitido'],
-            "dias_limpieza" => $_POST['nuevoGuardarDias'],
-            "hora_limpieza" => $_POST["nuevaHora"],
-            "foto_ventana" => $ruta
-        );
+                    $ruta = "images/ventanas/" . $_POST["nuevaReferencia"] . "/" . $aleatorio . ".png";
 
+                    $origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
+
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                    imagepng($destino, $ruta);
+                }
+            }
+
+            $tabla = "ventana";
+
+            $datos = array(
+                "referencia" => $_POST["nuevaReferencia"],
+                "ubicacion" => $_POST["nuevaUbicacion"],
+                "usuario_permitidos" => $_POST['nuevoUsuarioPermitido'],
+                "dias_limpieza" => $_POST['nuevoGuardarDias'],
+                "hora_limpieza" => $_POST["nuevaHora"],
+                "foto_ventana" => $ruta
+            );
 
 
-         $respuesta = ventanaModelo::mdlIngresarVentana($tabla, $datos);
 
-         if ($respuesta == "ok") {
+            $respuesta = ventanaModelo::mdlIngresarVentana($tabla, $datos);
 
-            $color = "tituloWhite";
+            if ($respuesta == "ok") {
 
-            echo "<script>
+                $color = "tituloWhite";
+
+                echo "<script>
             Swal.fire({
 
                 type: 'success',
@@ -142,106 +142,104 @@ class ventanasControlador
                     });
 
                     </script>";
-                }
             }
         }
+    }
 
     /* ================================================================
         		EDITAR Ventana
                 ================================================================= */
-                static public function ctrEditarVentana()
-                {
+    static public function ctrEditarVentana()
+    {
 
-                    if (isset($_POST["editarReferencia"])) {
+        if (isset($_POST["editarReferencia"])) {
 
-                    $ruta = $_POST["fotoActual"];
+            $ruta = $_POST["fotoActual"];
 
-					if (isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])) {
+            if (isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])) {
 
-	                        list($ancho,$alto)=getimagesize($_FILES["editarFoto"]["tmp_name"]);
+                list($ancho, $alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
 
-	                        $nuevoAncho = 500;
-	                        $nuevoAlto = 500;
+                $nuevoAncho = 500;
+                $nuevoAlto = 500;
 
-	                        /*=============================================
+                /*=============================================
 	                         Directorio de la Foto
 	                         =============================================*/
-	                        $directorio = "images/ventanas/".$_POST["editarReferencia"];
+                $directorio = "images/ventanas/" . $_POST["editarReferencia"];
 
 
-	                        if (!empty($_POST["fotoActual"])) {
-	                        	
-	                        	unlink($_POST["fotoActual"]);
+                if (!empty($_POST["fotoActual"])) {
 
-	                        }else{
+                    unlink($_POST["fotoActual"]);
+                } else {
 
-	                        	mkdir($directorio, 0755);
+                    mkdir($directorio, 0755);
+                }
 
-	                        }
-
-	                        /*=============================================
+                /*=============================================
 	                        Guardar la imagen segun su Formato
 	                        =============================================*/
 
-	                        if ($_FILES["editarFoto"]["type"] == "image/jpeg") {
+                if ($_FILES["editarFoto"]["type"] == "image/jpeg") {
 
-	                            /*=============================================
+                    /*=============================================
 	                            Guardar Formato JPG en Directorio
-	                            =============================================*/ 
+	                            =============================================*/
 
-	                            $aleatorio = mt_rand(100,999);
+                    $aleatorio = mt_rand(100, 999);
 
-	                            $ruta = "images/ventanas/".$_POST["editarReferencia"]."/".$aleatorio.".jpg";
+                    $ruta = "images/ventanas/" . $_POST["editarReferencia"] . "/" . $aleatorio . ".jpg";
 
-	                            $origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
+                    $origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
 
-	                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-	                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho,$alto);
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-	                            imagejpeg($destino,$ruta);
-	                        }
+                    imagejpeg($destino, $ruta);
+                }
 
-	                        if ($_FILES["editarFoto"]["type"] == "image/png") {
+                if ($_FILES["editarFoto"]["type"] == "image/png") {
 
-	                            /*=============================================
+                    /*=============================================
 	                            Guardar Formato PNG en Directorio
 	                            =============================================*/
 
-	                            $aleatorio = mt_rand(100,999);
+                    $aleatorio = mt_rand(100, 999);
 
-	                            $ruta = "images/ventanas/".$_POST["editarReferencia"]."/".$aleatorio.".png";
+                    $ruta = "images/ventanas/" . $_POST["editarReferencia"] . "/" . $aleatorio . ".png";
 
-	                            $origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
+                    $origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
 
-	                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
 
-	                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho,$alto);
+                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 
-	                            imagepng($destino,$ruta);
-	                        }
-	                    }
+                    imagepng($destino, $ruta);
+                }
+            }
 
-                        $tabla = "ventana";
-                        $idVentana = $_POST['idActual'];
+            $tabla = "ventana";
+            $idVentana = $_POST['idActual'];
 
-                        $datos = array(
-                            "referencia" => $_POST["editarReferencia"],
-                            "ubicacion" => $_POST["editarUbicacion"],
-                            "usuario_permitidos" => $_POST['editarUsuarioPermitido'],
-                            "dias_limpieza" => $_POST['editarGuardarDias'],
-                            "hora_limpieza" => $_POST["editarHora"],
-                            "foto_ventana" => $ruta,
-                            "id" => $idVentana
-                        );
+            $datos = array(
+                "referencia" => $_POST["editarReferencia"],
+                "ubicacion" => $_POST["editarUbicacion"],
+                "usuario_permitidos" => $_POST['editarUsuarioPermitido'],
+                "dias_limpieza" => $_POST['editarGuardarDias'],
+                "hora_limpieza" => $_POST["editarHora"],
+                "foto_ventana" => $ruta,
+                "id" => $idVentana
+            );
 
-                        $respuesta = ventanaModelo::mdlEditarVentana($tabla, $datos);
+            $respuesta = ventanaModelo::mdlEditarVentana($tabla, $datos);
 
-                        if ($respuesta == "ok") {
+            if ($respuesta == "ok") {
 
-                            $color = "tituloWhite";
+                $color = "tituloWhite";
 
-                            echo "<script>
+                echo "<script>
                             Swal.fire({
 
                                 type: 'success',
@@ -262,36 +260,36 @@ class ventanasControlador
                                     });
 
                                     </script>";
-                                }
-                            }
-                        }
+            }
+        }
+    }
 
     /*=============================================
 		= BORRAR O ELIMINAR Ventana    =
 		=============================================*/
 
-        static public function ctrBorrarVentana()
-        {
+    static public function ctrBorrarVentana()
+    {
 
-            if (isset($_GET["idVentana"])) {
+        if (isset($_GET["idVentana"])) {
 
-                $tabla = "ventana";
+            $tabla = "ventana";
 
-                $datos = $_GET["idVentana"];
+            $datos = $_GET["idVentana"];
 
-                if ($_GET["idVentana"] != null) {
+            if ($_GET["idVentana"] != null) {
 
-                    unlink($_GET["fotoVentana"]);
+                unlink($_GET["fotoVentana"]);
 
-                    rmdir('images/ventanas/' . $_GET["referencia"]);
+                rmdir('images/ventanas/' . $_GET["referencia"]);
 
-                    $respuesta = ventanaModelo::mdlBorrarVentana($tabla, $datos);
+                $respuesta = ventanaModelo::mdlBorrarVentana($tabla, $datos);
 
-                    if ($respuesta == "ok") {
+                if ($respuesta == "ok") {
 
-                        $color = "tituloWhite";
+                    $color = "tituloWhite";
 
-                        echo "<script>
+                    echo "<script>
                         Swal.fire({
 
                            type: 'success',
@@ -315,8 +313,8 @@ class ventanasControlador
                                });
 
                                </script>";
-                           }
-                       }
-                   }
-               }
-           }
+                }
+            }
+        }
+    }
+}

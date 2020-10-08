@@ -110,15 +110,33 @@ class ventanaModelo
     }
 
     //METODO PARA TRAER EL HISTORICO DE VENTANAS
-    static public function mdlHistoricoVentanas($tabla){
+    static public function mdlHistoricoVentanas($tabla, $item, $valor, $item2, $valor2)
+    {
+        if ($item != null AND $item2 != null) {
 
-        $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-         $stmt->execute();
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND 
+                                                  $item2 = :$item2");
+            $stmt->bindparam(":" . $item, $valor, PDO::PARAM_STR);
+            $stmt->bindparam(":" . $item2, $valor2, PDO::PARAM_STR);
+            $stmt->execute();
 
-        return $stmt->fetchAll();
 
-        $stmt->close();
-         $stmt = null;
+            return $stmt->fetchAll();
+
+            $stmt->close();
+            $stmt = null;
+        } else {
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+            $stmt->execute();
+
+            return $stmt->fetchAll();
+
+            $stmt->close();
+
+            $stmt = null;
+        }
     }//FIN del metodo de conexion para historico de ventanas
 
 
