@@ -15,6 +15,16 @@
 		
 		}
 
+		// MOSTRAR GRAFICO DE TEMPERATURA 
+		static public function ctrHistoricoTemperatura(){
+
+			$tabla = "temp_historicos";
+
+			$respuesta = temperaturaModelo::mdlHistoricoTemperatura($tabla);
+
+			return $respuesta;
+		}
+
 
 		static public function ctrCrearCuarto(){
 				
@@ -23,7 +33,6 @@
 				if (preg_match('/^[a-zA-Z0-9ñÑáéióúÁÉÍÓÚ ]+$/', $_POST["nuevoCuarto"])) {
 
                 	$tabla = "temp_habitaciones";
-
 
                 	$datos = array("nombre" => $_POST["nuevoCuarto"],
                 					"min_temp" => $_POST["minTemp"],

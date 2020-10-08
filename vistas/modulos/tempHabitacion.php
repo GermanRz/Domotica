@@ -85,7 +85,8 @@
     </div>  
   </section>
 
-  <!-- Humedad -->
+<!-- 
+  
   <section class="content">
     <div class="card">
       <div class="card-header" style="background: #343a40; color:#fff;">
@@ -93,7 +94,7 @@
       </div>      
       <div class="card-body" style="background: #424242;">
         <div class="row">
-          <!-- Control -->
+          
           <div class="col-md-4 text-center">
             <div class="card card-primary">
               <div class="card-header" style="background:#343a40;">
@@ -114,7 +115,7 @@
               </div>
             </div>
           </div>            
-          <!-- grafiko Humedad -->
+          
           <div class="col-8">
               <div class="card card-primary">
                 <div class="card-header" style="background:#343a40;">
@@ -140,6 +141,8 @@
     </div>  
   </section>
 
+-->
+
   <!-- TVOC -->
   <section class="content">
     <div class="card">
@@ -148,7 +151,7 @@
       </div>       
       <div class="card-body" style="background: #424242;">
         <div class="row">
-          <!-- Control -->
+          
           <div class="col-md-4 text-center">
             <div class="card card-primary">
               <div class="card-header" style="background:#343a40;">
@@ -169,7 +172,7 @@
               </div>
             </div>
           </div>
-          <!-- Grafico TVOC -->
+          
           <div class="col-8">
               <div class="card card-primary">
                 <div class="card-header" style="background:#343a40;">
@@ -191,7 +194,7 @@
 
 
                 </div>
-                <!-- /.card-body -->
+                
               </div>
           </div>
         </div>
@@ -200,3 +203,77 @@
   </section>
 
 </div>
+
+<?php
+  $labelsTemp=array();
+  $temperaturas=array();
+  $respuestaTemperatura= temperaturaControlador::ctrHistoricoTemperatura();
+  
+  foreach($respuestaTemperatura as $key => $value){
+    array_push($temperaturas, $value["temperatura"]);
+    $hora_temperatura=substr($value["fecha"],11,5);
+    array_push($labelsTemp, $hora_temperatura);
+  }
+?>
+
+<script>
+//--------  Grafico de Temperatura --------------
+    var ctxT =$("#GrafTemp").get(0).getContext('2d');
+    var chart = new Chart(ctxT, {
+      type: 'line',
+      data: {
+        labels: [
+          <?php
+            foreach($labelsTemp as $value){
+              echo "'".$value."',";
+            }
+          ?>
+        ],          
+        datasets: [{
+          label: 'Temperatura en grados ºC',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data:[
+            <?php
+              foreach($temperaturas as $key => $value){
+                echo $value.",";
+              }
+            ?>
+          ]
+        }]
+      },
+
+      // Configuration options go here
+      options: {
+        responsive: true,
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItems, data){
+              return tooltipItems.yLabel + '°C';
+            }
+          }
+        }
+      }
+    });
+
+//------------- GRAFICO DE GASES --------------
+    var ctxTv = document.getElementById('GrafTvo',).getContext('2d');
+    var chart = new Chart(ctxTv, {
+      type: 'line',
+      data: {
+        labels:
+        ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
+        datasets: [{
+          label: 'Tvoc en %',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+      },
+      options: {
+        responsive: true,       
+      }
+    });  
+
+
+</script>
