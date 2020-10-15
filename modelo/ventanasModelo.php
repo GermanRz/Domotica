@@ -164,4 +164,41 @@ class ventanaModelo
 
         $stmt = null;
     }
+
+      /* ================================================================
+         CREAR Historico Ventanas
+        ================================================================= */
+     static public function mdlCrearHistoricoVentana($tabla, $datos)
+    {
+        
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_ventana, 
+            consumo_agua, tipo_limpieza,fecha_inicio,fecha_final,duracion) VALUES 
+            (:id_ventana, :consumo_agua, :tipo_limpieza, :fecha_inicio,:fecha_final,:duracion)");
+
+
+        $stmt->bindparam(":id_ventana", $datos["id_ventana"], PDO::PARAM_STR);
+
+        $stmt->bindparam(":consumo_agua", $datos["consumo_agua"], PDO::PARAM_STR);
+
+        $stmt->bindparam(":tipo_limpieza", $datos["tipo_limpieza"], PDO::PARAM_STR);
+
+        $stmt->bindparam(":fecha_inicio", $datos["fecha_inicio"], PDO::PARAM_STR);
+
+        $stmt->bindparam(":fecha_final", $datos["fecha_final"], PDO::PARAM_STR);
+
+        $stmt->bindparam(":duracion", $datos["duracion"], PDO::PARAM_STR);
+
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            return "error";
+        }
+
+        $stmt->close();
+
+        $stmt = null;
+    }
 }

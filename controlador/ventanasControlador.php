@@ -29,6 +29,60 @@ class ventanasControlador
 
 
 
+    /* ================================================================
+                CREAR Historico Ventana
+                ================================================================= */
+
+    static public function ctrCrearHistoricoVentana()
+    {
+
+        if (isset($_POST["limpiezaVentana"])) {
+            $numero = "5";
+            $hora = "2020-10-08 10:32:24";
+            $tabla = "registro_ventana_limpieza";
+
+            $datos = array(
+                "id_ventana" => $_POST['limpiezaVentana'],
+                "consumo_agua" => $numero,
+                "tipo_limpieza" => $_POST['tipo_limpieza'],
+                "fecha_inicio" => $hora,
+                "fecha_final" => $hora,
+                "duracion" => $numero
+            );
+
+            
+
+            $respuesta = ventanaModelo::mdlCrearHistoricoVentana($tabla, $datos);
+
+            if ($respuesta == "ok") {
+
+                $color = "tituloWhite";
+
+                echo "<script>
+            Swal.fire({
+
+                type: 'success',
+                html: '<h3 class=" . $color . "> ¡Ventana añadida correctamente! </h3>',
+                background: '#343a40',
+                showConfirmButton: true,
+                confirmButtonColor: '#28a745',
+                confirmButtonText: 'Ok',
+                closeOnConfirm: false
+
+
+                }).then((result)=>{
+
+                    if(result.value){
+
+                        window.location = 'ventanas';
+                    }      
+                    });
+
+                    </script>";
+            }
+        }
+    }
+
 
 
 

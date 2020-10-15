@@ -40,3 +40,4 @@ INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`,
 	(73, 'german ramirez', 'german', '$2y$10$QH8Uky5T8uVes6S1NJ292epvzug3E1rgQxQl5OXsHe1pBt7ox/vwq', 'Invitado', 'images/usuarios/german/888.png', '1', '2020-05-14 16:45:52', NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
+usuariosposventana

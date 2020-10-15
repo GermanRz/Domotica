@@ -242,7 +242,7 @@
         <div class="modal-body" style="background: #7A7878; color:#fff;">
 
           <h1>Referencia</h1>
-          <select class="form-control input-lg" id="limpieza" name="limpieza" required>
+          <select class="form-control input-lg" id="limpiezaVentana" name="limpiezaVentana" required>
 
               <option value="">Selecionar Referencia</option>
 
@@ -255,7 +255,7 @@
 
               foreach ($limpieza as $key => $value) {
 
-                echo '<option value="'.$value["referencia"].'">'.$value["referencia"].'</option>';
+                echo '<option value="'.$value["id"].'">'.$value["referencia"].'</option>';
               }
 
               ?>
@@ -265,17 +265,24 @@
                                     intesidad
           =================================================================  -->
           <h1>Intensidad</h1>
-
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn" style="background:#6c757d; color:white">Limpieza Suave</button>
-            <button type="button" class="btn" style="background:#6c757d; color:white">Limpieza Profunda</button>
-          </div>
+          <select class="form-control input-lg" name="tipo_limpieza" id="tipo_limpieza"> 
+            <option value="">Selecionar Tipo</option>
+            <option value="suave">Suave</option>
+            <option value="profundo">Profundo</option>
+          </select>
           <p> </p>
           <!-- Modal footer -->
           <div class="modal-footer" style="background: #343a40; color:#fff;">
+            <button type="submit" class="btn" style="background: #3d9970; color:white">Empezar</button>
             <button type="button" class="btn" style="background:#d81b60; color:white" data-dismiss="modal">Cancelar</button>
           </div>
+          <?php
 
+          $registro = new ventanasControlador();
+
+          $registro->ctrCrearHistoricoVentana();
+
+          ?>
         </div>
       </form>
     </div>
