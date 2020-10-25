@@ -207,37 +207,50 @@
 							/*=============================================
 							=      VALIDAR TOGGLE AGREGAR BLOQUEO        agregarCaracteristicas=
 							=============================================*/
-							
-							if($_POST["agregarBloqueo"] == "on"){
 
-								$_POST["agregarBloqueo"]=1;
+							
+							if($_POST["estadoBloqueoModal"] == "on"){
+
+								$_POST["estadoBloqueoModal"]=2;
 
 							}else{
-								$_POST["agregarBloqueo"]=3;
+
+								$_POST["estadoBloqueoModal"]=1;
 							}
+
+
+							
+
+							// echo '<script> console.log("'.$_POST["estadoBloqueoModal"].'") </script>';
+
+							
 
 							/*=============================================
 							=      VALIDAR TOGGLE AGREGAR ALARMA        =
 							=============================================*/
 							
-							if($_POST["agregarAlarma"] == "on"){
+							if($_POST["btnAlarmaModal"] == "on"){
 
-								$_POST["agregarAlarma"]=1;
+								$_POST["btnAlarmaModal"]=2;
 
 							}else{
-								$_POST["agregarAlarma"]=3;
+								$_POST["btnAlarmaModal"]=1;
 							}
 
-							//echo '<script> console.log("'.$_POST["agregarAlarma"].'") </script>';
 
-							if($_POST["estadoPuerta"] == "on"){
 
-								$_POST["estadoPuerta"]=1;
+							// echo '<script> console.log("'.$_POST["estadoBloqueoModal"].'") </script>';
+
+							if($_POST["btnPtaEstado"] == "on"){
+
+								$_POST["btnPtaEstado"]=0;
 
 							}else{
-								$_POST["estadoPuerta"]=0;
+								$_POST["btnPtaEstado"]=1;
 							}
 							
+
+							// echo '<script> console.log("'.$_POST["btnPtaEstado"].'") </script>';
 							/*===================================
 							=            Editar foto            =
 							===================================*/
@@ -320,10 +333,10 @@
 
 
 							$datos = array("nombre" => $_POST["editarNombre"],
-										"sensorBloqueo" => $_POST["agregarBloqueo"],
-										"alarma" => $_POST["agregarAlarma"],
+										"sensorBloqueo" => $_POST["estadoBloqueoModal"],
+										"alarma" => $_POST["btnAlarmaModal"],
 										"foto" => $ruta,
-										"estado" => $_POST["estadoPuerta"],
+										"estado" => $_POST["btnPtaEstado"],
 										"numero" => $_POST["idPuertaEditar"]);
 										
 
@@ -420,6 +433,19 @@
 		
 		/*=====  End of Contar Puertas  ======*/
 
+		/*======================================
+	=      Estadisticas Puertas            =
+	======================================*/
+
+		static public function ctrEstadisticas($tabla, $date1, $date2)
+		{
+			
+			$respuesta = puertaModelo::mdlEstadisticas($tabla,$date1,$date2);
+
+			return $respuesta;
+			
+		}
+		/*=====  End of Estadisticas  Puertas  ======*/
 				/*=============================================
 		= BORRAR O ELIMINAR Puerta    =
 		=============================================*/

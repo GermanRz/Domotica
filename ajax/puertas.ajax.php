@@ -45,11 +45,60 @@
 
 		}
 
+	/*=============================================
+	=            Puerta Estado           =
+	=============================================*/
+	
+		public $puertaNumeroBloqueo;
+		public $estadoBloqueoPuerta;
+
+		public function ajaxBloqueoPuerta()
+		{
+
+			$tabla = "puertas";
+
+			$item1  = "sensorBloqueo";
+
+			$valor1 = $this->estadoBloqueoPuerta;
+
+			$item2 ="numero";
+			
+			$valor2 =$this->puertaNumeroBloqueo;
+
+			$respuesta = puertaModelo::mdlActualizarPuerta($tabla, $item1, $valor1, $item2, $valor2);
+
+		}
+
+		/*=============================================
+	=            Alarma Estado           =
+	=============================================*/
+	
+		public $puertaNumeroAlarma;
+		public $estadoAlarma;
+
+		public function ajaxAlarmaPuerta()
+		{
+
+			$tabla = "puertas";
+
+			$item1  = "alarma";
+
+			$valor1 = $this->estadoAlarma;
+
+			$item2 ="numero";
+			
+			$valor2 =$this->puertaNumeroAlarma;
+
+			$respuesta = puertaModelo::mdlActualizarPuerta($tabla, $item1, $valor1, $item2, $valor2);
+
+		}
+
 
 
 		/*=============================================
-		=    VALIDAR NO REPETIR USUARIO            =
+		=    MODAL EDITAR BLOQUEO            =
 		=============================================*/
+
 
 	// 	public $validarUsuario;
 	// 	public function ajaxValidarUsuario()
@@ -62,6 +111,49 @@
 	// 		echo json_encode($respuesta);
 
 	// 	}
+
+		/*=============================================
+		=           MODAL ESTADISTICAS             =
+		=============================================*/
+		public $arrayFechas = array();
+		public $arrayAlarmas = array();
+		public $arrayAlarmasAct = array();
+		public $arrayAlarmasDes = array();
+		public $arraySinAlarmas = array();
+
+		public function ajaxEstadisticasPuerta(){
+
+			$tabla = "estadisticas";
+
+			$date1 = $this->date1;  
+
+			$date2 = $this->date2; 
+
+		    $respuesta = PuertasControlador::ctrEstadisticas($tabla, $date1, $date2);
+		    
+			echo '<pre>'; print_r($respuesta); echo '</pre>';
+		    
+		   
+		    // foreach ($respuestaFechas as $key => $value) {
+		    //   $fechas=$value["fechas"];
+		    //   $alarma=$value["alarmas"];
+		    //   array_push($arrayFechas, $fechas);
+		    //   echo json_encode($arrayFechas);
+		    //   if ($alarma == 1) {
+		    //     array_push($arraySinAlarmas,$alarma);
+		    //     echo json_encode($arraySinAlarmas);
+		    //   }else if($alarma == 2){
+		    //     array_push($arrayAlarmasAct,$alarma);
+		    //     echo json_encode($arrayAlarmasAct);
+		    //   }else{
+		    //     array_push($arrayAlarmasDes,$alarma);
+		    //     echo json_encode($arrayAlarmasDes);
+		    //   }
+		    // }
+
+		}
+
+		/*============================================*/
 	}
 
 /*=============================================
@@ -93,8 +185,39 @@ if (isset($_POST["estadoPuerta"])) {
 
 }
 
+
 /*=============================================
-		=    VALIDAR NO REPETIR USUARIO            =
+=            ACTIVAR BLOQUEO            =
+=============================================*/
+if (isset($_POST["estadoBloqueoPuerta"])) {
+
+	$estadoBloqueoPuerta = new ajaxPuertas();
+
+	$estadoBloqueoPuerta-> puertaNumeroBloqueo = $_POST["puertaNumeroBloqueo"];
+
+	$estadoBloqueoPuerta-> estadoBloqueoPuerta = $_POST["estadoBloqueoPuerta"];
+
+	$estadoBloqueoPuerta-> ajaxBloqueoPuerta();
+
+}
+
+/*=============================================
+=            ACTIVAR ALARMA            =
+=============================================*/
+if (isset($_POST["estadoAlarma"])) {
+
+	$estadoAlarma = new ajaxPuertas();
+
+	$estadoAlarma-> puertaNumeroAlarma = $_POST["puertaNumeroAlarma"];
+
+	$estadoAlarma-> estadoAlarma = $_POST["estadoAlarma"];
+
+	$estadoAlarma-> ajaxAlarmaPuerta();
+
+}
+
+/*=============================================
+		=    MODAL EDITAR BLOQUEO          =
 =============================================*/
 // if (isset($_POST["validarUsuario"])) {
 	
@@ -104,6 +227,21 @@ if (isset($_POST["estadoPuerta"])) {
 
 // 		$valUsuario -> ajaxValidarUsuario();
 //} 
+/*=============================================
+=             MODAL ESTADISTICAS          =
+=============================================*/
+if(ISSET($_POST['search'])){
+
+	$datosFecha = new ajaxPuertas();
+
+    $datosFecha -> $date1 = date("Y-m-d", strtotime($_POST['date1'])); 
+    $datosFecha -> $date2 = date("Y-m-d", strtotime($_POST['date2'])); 
+    $datosFecha -> ajaxEstadisticasPuerta();
+    echo '<pre>'; print_r($datosFecha); echo '</pre>';
+}
+
+/*=============================================*/
+
 
 
 

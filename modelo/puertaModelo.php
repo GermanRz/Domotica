@@ -160,4 +160,26 @@
             $stmt = null;
         
         }
+
+         /*==========================================
+       	=            Estadisticas Puertas            =
+       	==========================================*/
+
+           static public function mdlEstadisticas($tabla, $date1, $date2){
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $tabla.fechas BETWEEN :date1 AND :date2");
+
+            $stmt->bindValue(":date1",$date1);
+            $stmt->bindValue(":date2",$date2);
+            
+            $stmt -> execute();
+
+            return $stmt -> fetchAll();
+            
+            $stmt -> close();
+
+            $stmt = null;
+        }
+        // SELECT COUNT(*) FROM $tabla WHERE $item=$valor
+        /*==========================================*/
 	}

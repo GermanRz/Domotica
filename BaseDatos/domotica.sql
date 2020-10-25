@@ -21,39 +21,39 @@ CREATE TABLE IF NOT EXISTS `bitacorapuertas` (
   `numero` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `accion` varchar(50) DEFAULT NULL,
-  `horaFecha` datetime DEFAULT NULL
+  `horaFecha` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.bitacorapuertas: ~22 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.bitacorapuertas: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `bitacorapuertas` DISABLE KEYS */;
 INSERT INTO `bitacorapuertas` (`numero`, `nombre`, `accion`, `horaFecha`) VALUES
-	(1, 'lolito', 'La puerta fue creada', '2020-09-11 15:31:35'),
-	(2, 'oscaresgei', 'La puerta fue creada', '2020-09-11 15:52:29'),
-	(3, 'felipeesgei', 'La puerta fue creada', '2020-09-11 15:55:44'),
-	(4, 'caicedoesgei', 'La puerta fue creada', '2020-09-11 15:58:56'),
-	(1, 'lolito', 'La puerta fue creada', '2020-09-11 15:31:35'),
-	(2, 'oscaresgei', 'La puerta fue creada', '2020-09-11 15:52:29'),
-	(3, 'felipeesgei', 'La puerta fue creada', '2020-09-11 15:55:44'),
-	(4, 'caicedoesgei', 'La puerta fue creada', '2020-09-11 15:58:56'),
-	(1, 'lolito', 'la alarma fue encendida', '2020-09-15 12:23:20'),
-	(1, 'lolito', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 12:23:20'),
-	(1, 'lolito', 'la alarma fue encendida', '2020-09-15 12:40:05'),
-	(1, 'lolito', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 12:40:05'),
-	(1, 'lolito', 'la alarma fue encendida', '2020-09-15 12:40:22'),
-	(1, 'lolito', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 12:40:22'),
-	(1, 'lolito', 'la alarma fue encendida', '2020-09-15 12:40:25'),
-	(1, 'lolito', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 12:40:25'),
-	(2, 'oscaresgei', 'la alarma fue encendida', '2020-09-15 13:26:43'),
-	(2, 'oscaresgei', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 13:26:43'),
-	(2, 'oscaresgei', 'la alarma fue encendida', '2020-09-15 13:26:46'),
-	(2, 'oscaresgei', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 13:26:46'),
-	(2, 'oscaresgei', 'la alarma fue encendida', '2020-09-15 13:26:52'),
-	(2, 'oscaresgei', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 13:26:52'),
-	(2, 'oscaresgei', 'la alarma fue encendida', '2020-09-15 13:27:09'),
-	(2, 'oscaresgei', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 13:27:09'),
-	(2, 'oscaresgei', 'la alarma fue encendida', '2020-09-15 13:27:36'),
-	(2, 'oscaresgei', 'no existe o se elimnò el sensor de bloqueo', '2020-09-15 13:27:36');
+	(1, 'lolito', 'La puerta fue creada', '2020-09-11'),
+	(2, 'oscaresgei', 'La puerta fue creada', '2020-09-11'),
+	(3, 'felipeesgei', 'La puerta fue creada', '2020-09-11'),
+	(4, 'caicedoesgei', 'La puerta fue creada', '2020-09-11'),
+	(62, 'habitacion', 'la puerta fue desbloqueada', '2020-10-07'),
+	(62, 'habitacion', 'no existe o se eliminò el sendor de alarma.', '2020-10-07'),
+	(62, 'habitacion', 'la puerta fue desbloqueada', '2020-10-07'),
+	(62, 'habitacion', 'la alarma fue apagada', '2020-10-07'),
+	(62, 'habitacion', 'la alarma fue apagada', '2020-10-08'),
+	(62, 'habitacion', 'no existe o se elimnò el sensor de bloqueo', '2020-10-08'),
+	(62, 'habitacion', 'la puerta fue desbloqueada', '2020-10-08'),
+	(62, 'habitacion', 'la alarma fue apagada', '2020-10-08');
 /*!40000 ALTER TABLE `bitacorapuertas` ENABLE KEYS */;
+
+-- Volcando estructura para tabla domotica.estadisticas
+CREATE TABLE IF NOT EXISTS `estadisticas` (
+  `alarmas` int(11) DEFAULT NULL,
+  `sensorBloqueo` int(11) DEFAULT NULL,
+  `fechas` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Volcando datos para la tabla domotica.estadisticas: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `estadisticas` DISABLE KEYS */;
+INSERT INTO `estadisticas` (`alarmas`, `sensorBloqueo`, `fechas`) VALUES
+	(2, 3, '2020-10-08'),
+	(2, 2, '2020-10-08');
+/*!40000 ALTER TABLE `estadisticas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla domotica.horapuertas
 CREATE TABLE IF NOT EXISTS `horapuertas` (
@@ -61,17 +61,12 @@ CREATE TABLE IF NOT EXISTS `horapuertas` (
   `UltimaHora` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.horapuertas: ~8 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.horapuertas: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `horapuertas` DISABLE KEYS */;
 INSERT INTO `horapuertas` (`numero`, `UltimaHora`) VALUES
-	(1, '2020-09-15 12:40:25'),
-	(2, '2020-09-15 13:27:36'),
-	(3, '2020-09-11 15:55:44'),
-	(4, '2020-09-11 15:58:56'),
-	(1, '2020-09-15 12:40:25'),
-	(2, '2020-09-15 13:27:36'),
-	(3, '2020-09-11 15:55:44'),
-	(4, '2020-09-11 15:58:56');
+	(62, '2020-10-08 11:52:17'),
+	(63, '2020-09-16 16:40:27'),
+	(64, '2020-09-16 16:43:06');
 /*!40000 ALTER TABLE `horapuertas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla domotica.puertas
@@ -83,15 +78,14 @@ CREATE TABLE IF NOT EXISTS `puertas` (
   `foto` mediumtext DEFAULT NULL,
   `estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`numero`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.puertas: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.puertas: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `puertas` DISABLE KEYS */;
 INSERT INTO `puertas` (`numero`, `nombre`, `sensorBloqueo`, `alarma`, `foto`, `estado`) VALUES
-	(1, 'lolito', 3, 1, NULL, 1),
-	(2, 'oscaresgei', 3, 1, NULL, 0),
-	(3, 'felipeesgei', 3, 1, NULL, 0),
-	(4, 'caicedoesgei', 3, 1, NULL, 0);
+	(62, 'habitacion', 2, 2, '', 0),
+	(63, 'habitacion principal', 3, 3, NULL, 0),
+	(64, 'habitacion felipe', 3, 3, NULL, 0);
 /*!40000 ALTER TABLE `puertas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla domotica.usuarios
@@ -117,6 +111,16 @@ INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`,
 	(71, 'monica aristizabal', 'monica', '$2y$10$sm3lslO0b5gpYZgaJSfsGOofljBWkAzDZvSpePLXWEiF05yz3N2BC', 'Invitado', 'images/usuarios/monica/966.png', '0', '2020-05-11 13:50:07', NULL),
 	(73, 'german ramirez', 'german', '$2y$10$QH8Uky5T8uVes6S1NJ292epvzug3E1rgQxQl5OXsHe1pBt7ox/vwq', 'Invitado', 'images/usuarios/german/888.png', '1', '2020-05-14 16:45:52', NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+
+-- Volcando estructura para disparador domotica.Estadisticas
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `Estadisticas` AFTER UPDATE ON `puertas` FOR EACH ROW BEGIN		
+	INSERT INTO Estadisticas values
+	(NEW.alarma, NEW.sensorBloqueo,CURRENT_DATE());
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 -- Volcando estructura para disparador domotica.puertas_after_insert
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
