@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `bitacorapuertas` (
   `horaFecha` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.bitacorapuertas: ~326 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.bitacorapuertas: ~340 rows (aproximadamente)
 /*!40000 ALTER TABLE `bitacorapuertas` DISABLE KEYS */;
 INSERT INTO `bitacorapuertas` (`numero`, `nombre`, `accion`, `horaFecha`) VALUES
 	(1, 'lolito', 'La puerta fue creada', '2020-09-11 15:31:35'),
@@ -377,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `estadisticas` (
   `fechas` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.estadisticas: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.estadisticas: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `estadisticas` DISABLE KEYS */;
 INSERT INTO `estadisticas` (`alarmas`, `sensorBloqueo`, `nombre`, `fechas`) VALUES
 	(2, 2, 'Dormitorio principal', '2020-10-15'),
@@ -396,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `horapuertas` (
   `nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.horapuertas: ~28 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.horapuertas: ~44 rows (aproximadamente)
 /*!40000 ALTER TABLE `horapuertas` DISABLE KEYS */;
 INSERT INTO `horapuertas` (`numero`, `UltimaHora`, `nombre`) VALUES
 	(1, '2020-10-15 14:47:23', NULL),
