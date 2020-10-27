@@ -23,10 +23,10 @@
 							
 							if($_POST["agregarBloqueo"] == "on"){
 
-								$_POST["agregarBloqueo"]=1;
+								$_POST["agregarBloqueo"]=2;
 
 							}else{
-								$_POST["agregarBloqueo"]=3;
+								$_POST["agregarBloqueo"]=1;
 							}
 
 							/*=============================================
@@ -35,20 +35,20 @@
 							
 							if($_POST["agregarAlarma"] == "on"){
 
-								$_POST["agregarAlarma"]=1;
+								$_POST["agregarAlarma"]=2;
 
 							}else{
-								$_POST["agregarAlarma"]=3;
+								$_POST["agregarAlarma"]=1;
 							}
 
 							//echo '<script> console.log("'.$_POST["agregarAlarma"].'") </script>';
 
 							if($_POST["estadoPuerta"] == "on"){
 
-								$_POST["estadoPuerta"]=1;
+								$_POST["estadoPuerta"]=2;
 
 							}else{
-								$_POST["estadoPuerta"]=0;
+								$_POST["estadoPuerta"]=1;
 							}
 
 							/*==================================

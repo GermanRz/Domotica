@@ -899,7 +899,7 @@
                       </span>
 
                       <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="btnAgregarBloqueoModal">
+                        <input type="checkbox" class="custom-control-input" id="btnAgregarBloqueoModal" name="agregarBloqueo">
                         <label class="custom-control-label" for="btnAgregarBloqueoModal">  
                         </label>
                       </div>
