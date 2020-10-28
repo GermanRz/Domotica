@@ -627,7 +627,7 @@
           <!-- bar chart -->
           <div class="card card-success">
             <div class="card-body" style="background-color: #343a40; color: #fff;">
-              <div class="chart" id="chart">
+              <div class="chart" >
                 <canvas id="barChartSen" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
             </div>
@@ -713,7 +713,7 @@
           <!-- bar chart -->
           <div class="card card-success">
             <div class="card-body" style="background-color: #343a40; color: #fff;">
-              <div class="chart" id="chart">
+              <div class="chart" >
                 <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
             </div>

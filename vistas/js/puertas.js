@@ -586,7 +586,7 @@ $(document).on('click', '.recarga', function() {
         data: datos,
         dataType: 'json',
         success: function(respuesta) {
-            $('#chart').html(respuesta).fadeIn();
+            $('.chart').html(respuesta).fadeIn();
         }
     });
     return false;
