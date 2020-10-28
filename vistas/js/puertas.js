@@ -2,124 +2,124 @@
    DATATABLE
    =============================*/
 
-   $(".tabla").DataTable({
+$(".tabla").DataTable({
 
-     "language":{
+    "language": {
 
-      "sProcessing": "Procesando...",
-      "sLengthMenu": "Mostrar _MENU_ registro",
-      "sZeroRecords": "No se encontraron resultados",
-      "sEmptyTable": "Ningun dato disponible en esta tabla",
-      "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_", 
-      "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
-      "sInfoFiltered": "(Filtrando de un total de _MAX_ registros)",
-      "sInfoPostFix": "",
-      "sSearch": "Buscar:",
-      "sUrl": "",
-      "sInfoThousands": ",",
-      "sLoadingRecords": "Cargando...",
-      "oPaginate": {
-       "sFirst": "Primero",
-       "sLast": "Último",
-       "sNext": "Siguiente",
-       "sPrevious": "Anterior",
-     },
-     "oAria": {
-       "sSortAscending": "Activar para ordenar la columna de manera ascendente",
-       "sSortDescending": "Activar para ordenar la columna de manera descendiente",
-     },
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar _MENU_ registro",
+        "sZeroRecords": "No se encontraron resultados",
+        "sEmptyTable": "Ningun dato disponible en esta tabla",
+        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_",
+        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+        "sInfoFiltered": "(Filtrando de un total de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sUrl": "",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior",
+        },
+        "oAria": {
+            "sSortAscending": "Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": "Activar para ordenar la columna de manera descendiente",
+        },
 
-   }
+    }
 
- });
+});
 
 /*==============================
    Bootstrap Switch
    =============================*/
 
-   $("input[data-bootstrap-switch]").each(function(){
+$("input[data-bootstrap-switch]").each(function() {
     $(this).bootstrapSwitch('state', $(this).prop('checked'));
-  });
+});
 
 /*=============================================
 =            EDITAR PUERTA            =
 =============================================*/
 
-$(document).on("click", ".btnEditarPuerta" ,function(){
-  
-  var idPuerta = $(this).attr("idPuerta");
+$(document).on("click", ".btnEditarPuerta", function() {
 
-  var datos = new FormData();
+    var idPuerta = $(this).attr("idPuerta");
 
-  datos.append("idPuerta",idPuerta);
+    var datos = new FormData();
 
-  document.getElementById("btnEstadoModal").checked = false;
-  document.getElementById("btnAlarmaModal").checked = false;
-  document.getElementById("btnBloqueoModal").checked = false;
+    datos.append("idPuerta", idPuerta);
 
-  $.ajax({
+    document.getElementById("btnEstadoModal").checked = false;
+    document.getElementById("btnAlarmaModal").checked = false;
+    document.getElementById("btnBloqueoModal").checked = false;
 
-    url: 'ajax/puertas.ajax.php',
-    method: 'POST',
-    data: datos,
-    cache: false,
-    contentType: false,
-    processData: false,
-    dataType: 'json',
-    success:function(respuesta){
+    $.ajax({
 
-      $("#editarNombre").val(respuesta["nombre"]);
-      $("#puertaBloqueoModal").val(respuesta["sensorBloqueo"]);
-      $("#puertaAlarmaModal").val(respuesta["alarma"]);
-      $("#fotoActual").val(respuesta["foto"]);
-      $("#idPuerta").val(respuesta["estado"]);
-      $("#idPuertaEditar").val(respuesta["numero"]);
-      if(respuesta["foto"] != ""){
-        $(".previsualizar").attr("src", respuesta["foto"]);
-      }
+        url: 'ajax/puertas.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
 
-  
-      if (respuesta["estado"] == 0) {
+            $("#editarNombre").val(respuesta["nombre"]);
+            $("#puertaBloqueoModal").val(respuesta["sensorBloqueo"]);
+            $("#puertaAlarmaModal").val(respuesta["alarma"]);
+            $("#fotoActual").val(respuesta["foto"]);
+            $("#idPuerta").val(respuesta["estado"]);
+            $("#idPuertaEditar").val(respuesta["numero"]);
+            if (respuesta["foto"] != "") {
+                $(".previsualizar").attr("src", respuesta["foto"]);
+            }
 
-        document.getElementById("btnEstadoModal").checked = true;
 
-      }
+            if (respuesta["estado"] == 0) {
 
-      console.log(respuesta["alarma"])
+                document.getElementById("btnEstadoModal").checked = true;
 
-      if ((respuesta["alarma"] == 2) || (respuesta["alarma"] == 3)) {
+            }
 
-        var iconoAlarmaModal= document.getElementById("puertaAlarmaModal");
+            console.log(respuesta["alarma"])
 
-        $(iconoAlarmaModal).removeClass('far fa-siren');
+            if ((respuesta["alarma"] == 2) || (respuesta["alarma"] == 3)) {
 
-        $(iconoAlarmaModal).addClass('far fa-siren-on');
+                var iconoAlarmaModal = document.getElementById("puertaAlarmaModal");
 
-        $(iconoAlarmaModal).attr('alarmaPuertaModal', 0);
+                $(iconoAlarmaModal).removeClass('far fa-siren');
 
-        document.getElementById("btnAlarmaModal").checked = true;
+                $(iconoAlarmaModal).addClass('far fa-siren-on');
 
-      }
+                $(iconoAlarmaModal).attr('alarmaPuertaModal', 0);
 
-      if (respuesta["sensorBloqueo"] == 2 || respuesta["sensorBloqueo"] == 3) {
+                document.getElementById("btnAlarmaModal").checked = true;
 
-        var iconoBloqueoModal= document.getElementById("puertaBloqueoModal");
+            }
 
-        var btnBloqueoModal= document.getElementById("btnBloqueoModal");
+            if (respuesta["sensorBloqueo"] == 2 || respuesta["sensorBloqueo"] == 3) {
 
-         $(iconoBloqueoModal).removeClass('far fa-lock-open-alt');
+                var iconoBloqueoModal = document.getElementById("puertaBloqueoModal");
 
-         $(iconoBloqueoModal).addClass('far fa-lock-alt');
+                var btnBloqueoModal = document.getElementById("btnBloqueoModal");
 
-         $(btnBloqueoModal).attr('estadoBloqueoModal', 2);
+                $(iconoBloqueoModal).removeClass('far fa-lock-open-alt');
 
-        document.getElementById("btnBloqueoModal").checked = true;
+                $(iconoBloqueoModal).addClass('far fa-lock-alt');
 
-      }
-      
-    } 
+                $(btnBloqueoModal).attr('estadoBloqueoModal', 2);
 
-  });
+                document.getElementById("btnBloqueoModal").checked = true;
+
+            }
+
+        }
+
+    });
 
 
 })
@@ -172,7 +172,7 @@ $(document).on("click", ".btnEditarPuerta" ,function(){
   })
   */
 
-  /*=====  fin del  bloquear/desbloquear (puerta)  ======*/
+/*=====  fin del  bloquear/desbloquear (puerta)  ======*/
 
 
 
@@ -180,33 +180,33 @@ $(document).on("click", ".btnEditarPuerta" ,function(){
 =            sweet alert de eliminar            =
 ===============================================*/
 
-$(document).on("click",'.btnEliminarPuerta', function() {
+$(document).on("click", '.btnEliminarPuerta', function() {
 
-  var idPuerta = $(this).attr("idPuerta");
-  var fotoPuerta = $(this).attr("fotoPuerta");
-  var nombrePuerta = $(this).attr("nombrePuerta");
+    var idPuerta = $(this).attr("idPuerta");
+    var fotoPuerta = $(this).attr("fotoPuerta");
+    var nombrePuerta = $(this).attr("nombrePuerta");
 
-  Swal.fire({
+    Swal.fire({
 
-    title: '<span class="tituloWhite"> ¿Estas seguro de eliminarlo? </span>',
-    html: '<p class="text-white"> Puedes cancelar la accion si no estas seguro </p>',
-    type: 'warning',
-    background: '#343a40',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'si, eliminarlo!'
+        title: '<span class="tituloWhite"> ¿Estas seguro de eliminarlo? </span>',
+        html: '<p class="text-white"> Puedes cancelar la accion si no estas seguro </p>',
+        type: 'warning',
+        background: '#343a40',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si, eliminarlo!'
 
-  }).then(function(result){
+    }).then(function(result) {
 
-    if (result.value) {
+        if (result.value) {
 
-        window.location = "index.php?vista=puertas&idPuerta="+idPuerta+"&fotoPuerta="+fotoPuerta+"&nombrePuerta="+nombrePuerta;
-        
+            window.location = "index.php?vista=puertas&idPuerta=" + idPuerta + "&fotoPuerta=" + fotoPuerta + "&nombrePuerta=" + nombrePuerta;
 
-      }
-  })
-  
+
+        }
+    })
+
 
 });
 
@@ -216,258 +216,258 @@ $(document).on("click",'.btnEliminarPuerta', function() {
   BLOQUEAR/DESBLOQUEAR REAL (PUERTA)
   =============================*/
 
-$(document).on("click",".btnPtaBloqueoEstado", function() {
-  
-  var idPuerta = $(this).attr("idPuerta");
+$(document).on("click", ".btnPtaBloqueoEstado", function() {
 
-  var estadoBloqueoPuerta = $(this).attr("estadoBloqueoPuerta");
+    var idPuerta = $(this).attr("idPuerta");
 
-  var datos = new FormData();
+    var estadoBloqueoPuerta = $(this).attr("estadoBloqueoPuerta");
 
-  datos.append("puertaNumeroBloqueo",idPuerta);
+    var datos = new FormData();
 
-  datos.append("estadoBloqueoPuerta",estadoBloqueoPuerta);
+    datos.append("puertaNumeroBloqueo", idPuerta);
 
-  $.ajax({
+    datos.append("estadoBloqueoPuerta", estadoBloqueoPuerta);
 
-    url: 'ajax/puertas.ajax.php',
-      method: 'POST',
-      data: datos,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success:function(respuesta){
-       location.reload();
+    $.ajax({
 
-
-      }
+        url: 'ajax/puertas.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            location.reload();
 
 
-  })
-
-  if (estadoBloqueoPuerta == 3) {
+        }
 
 
-    $(this).attr('estadoBloqueoPuerta',2);
+    })
+
+    if (estadoBloqueoPuerta == 3) {
 
 
-  } else if (estadoBloqueoPuerta == 2) {
+        $(this).attr('estadoBloqueoPuerta', 2);
 
 
-
-    $(this).attr('estadoBloqueoPuerta',3);
-
-
-  }
-
-})
-
-
-  /*=====================================
-  =            Estado Alarma            =
-  =====================================*/
-
-
-$(document).on("click",".btnMonitorear", function() {
-  
-  var idPuerta = $(this).attr("idPuerta");
-
-  var estadoAlarma = $(this).attr("estadoAlarma");
-
-  var datos = new FormData();
-
-  datos.append("puertaNumeroAlarma",idPuerta);
-
-  datos.append("estadoAlarma",estadoAlarma);
-
-  $.ajax({
-
-    url: 'ajax/puertas.ajax.php',
-      method: 'POST',
-      data: datos,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success:function(respuesta){
-        location.reload();
-        // $(".relogeo").load(" .relogeo");
-        /*=======================================
-          REVISAR PARA HACER EL RELOGEO A UN DIV
-         ========================================*/
-        // $('#centradoText').append(respuesta);
-        // $('#centradoText').html(respuesta); 
-
-      }
-
-
-  })
-
-  if (estadoAlarma == 3) {
+    } else if (estadoBloqueoPuerta == 2) {
 
 
 
-
-    $(this).attr('estadoAlarma',2);
-
-
-  } else if (estadoAlarma == 2) {
+        $(this).attr('estadoBloqueoPuerta', 3);
 
 
-
-    $(this).attr('estadoAlarma',3);
-
-
-  }
+    }
 
 })
 
 
+/*=====================================
+=            Estado Alarma            =
+=====================================*/
 
-  /*=====================================
-  =            Estado Puerta            =
-  =====================================*/
-  
-  $(document).on("click",".btnPtaEstado", function() {
-  
-  var idPuerta = $(this).attr("idPuerta");
 
-  var estadoPuerta = $(this).attr("estadoPuerta");
+$(document).on("click", ".btnMonitorear", function() {
 
-  var datos = new FormData();
+    var idPuerta = $(this).attr("idPuerta");
 
-  datos.append("puertaNumero",idPuerta);
+    var estadoAlarma = $(this).attr("estadoAlarma");
 
-  datos.append("estadoPuerta",estadoPuerta);
+    var datos = new FormData();
 
-  $.ajax({
+    datos.append("puertaNumeroAlarma", idPuerta);
 
-      url: 'ajax/puertas.ajax.php',
-      method: 'POST',
-      data: datos,
-      cache: false,
-      contentType: false,
-      processData: false,
-      success:function(respuesta){
+    datos.append("estadoAlarma", estadoAlarma);
 
-        if (window.matchMedia("(max-width:767px)")) {
+    $.ajax({
 
-          Swal.fire({
+        url: 'ajax/puertas.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+            location.reload();
+            // $(".relogeo").load(" .relogeo");
+            /*=======================================
+              REVISAR PARA HACER EL RELOGEO A UN DIV
+             ========================================*/
+            // $('#centradoText').append(respuesta);
+            // $('#centradoText').html(respuesta); 
 
-                type: 'success',
-                title: '<span Class="text-white">¡El estado de la puerta se a actualizado correctamente!</span>',
+        }
+
+
+    })
+
+    if (estadoAlarma == 3) {
+
+
+
+
+        $(this).attr('estadoAlarma', 2);
+
+
+    } else if (estadoAlarma == 2) {
+
+
+
+        $(this).attr('estadoAlarma', 3);
+
+
+    }
+
+})
+
+
+
+/*=====================================
+=            Estado Puerta            =
+=====================================*/
+
+$(document).on("click", ".btnPtaEstado", function() {
+
+    var idPuerta = $(this).attr("idPuerta");
+
+    var estadoPuerta = $(this).attr("estadoPuerta");
+
+    var datos = new FormData();
+
+    datos.append("puertaNumero", idPuerta);
+
+    datos.append("estadoPuerta", estadoPuerta);
+
+    $.ajax({
+
+        url: 'ajax/puertas.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(respuesta) {
+
+            if (window.matchMedia("(max-width:767px)")) {
+
+                Swal.fire({
+
+                    type: 'success',
+                    title: '<span Class="text-white">¡El estado de la puerta se a actualizado correctamente!</span>',
                     background: '#343a40',
                     showConfirmButton: true,
                     confirmButtonColor: '#28a745',
                     confirmButtonText: 'Ok',
-                    closeOnConfirm: false 
+                    closeOnConfirm: false
 
-                    }).then((result)=>{
+                }).then((result) => {
 
-                        if(result.value){
+                    if (result.value) {
 
-                          window.location = 'puertas';
-                        }      
-                    });
+                        window.location = 'puertas';
+                    }
+                });
+            }
+
         }
 
-      }
 
+    })
 
-  })
+    if (estadoPuerta == 0) {
 
-  if (estadoPuerta == 0) {
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-danger');
+        $(this).html('Mal Estado');
+        $(this).attr('estadoPuerta', 1);
 
-    $(this).removeClass('btn-success');
-    $(this).addClass('btn-danger');
-    $(this).html('Mal Estado');
-    $(this).attr('estadoPuerta',1);
+    } else {
 
-  } else {
+        $(this).removeClass('btn-danger');
+        $(this).addClass('btn-success');
+        $(this).html('Buen Estado');
+        $(this).attr('estadoPuerta', 0);
 
-    $(this).removeClass('btn-danger');
-    $(this).addClass('btn-success');
-    $(this).html('Buen Estado');
-    $(this).attr('estadoPuerta',0);
-
-  }
+    }
 
 })
-  
-  /*=====  End of Estado Puerta  ======*/
-  
 
-  /*=============================================
+/*=====  End of Estado Puerta  ======*/
+
+
+/*=============================================
 =    Subiendo foto del usuario      =
 =============================================*/
 
-$(".nuevaFoto").change(function(){
+$(".nuevaFoto").change(function() {
 
-  var imagen = this.files[0];
+    var imagen = this.files[0];
 
-  /*=============================================
-  Validar Formato Foto
-  =============================================*/
+    /*=============================================
+    Validar Formato Foto
+    =============================================*/
 
-  if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+    if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
 
-    $(".nuevaFoto").val("");
+        $(".nuevaFoto").val("");
 
-    Swal.fire({
+        Swal.fire({
 
-      icon: "error",
-      title: 'Error al subir la imagen',
-      text: 'La imagen debe estar en formato JPG o PNG',
-      confirmButtonColor: '#dc3545',
-      confirmButtonText: 'Cerrar'
+            icon: "error",
+            title: 'Error al subir la imagen',
+            text: 'La imagen debe estar en formato JPG o PNG',
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Cerrar'
 
-    });
+        });
 
-  }else if(imagen["size"] > 2000000){
+    } else if (imagen["size"] > 2000000) {
 
-    $(".nuevaFoto").val("");
+        $(".nuevaFoto").val("");
 
-    Swal.fire({
+        Swal.fire({
 
-      type: 'error',
-      background: '#343a40',
-      html: '<p class="tituloWhite"> ¡Error al subir la imagen! </p>',
-      text: 'La imagen excede el tamaño permitido de 2MB',
-      confirmButtonColor: '#dc3545',
-      confirmButtonText: 'Ok'
+            type: 'error',
+            background: '#343a40',
+            html: '<p class="tituloWhite"> ¡Error al subir la imagen! </p>',
+            text: 'La imagen excede el tamaño permitido de 2MB',
+            confirmButtonColor: '#dc3545',
+            confirmButtonText: 'Ok'
 
-    });
+        });
 
-  }else{
+    } else {
 
-    var datosImagen = new FileReader;
+        var datosImagen = new FileReader;
 
-    datosImagen.readAsDataURL(imagen);
+        datosImagen.readAsDataURL(imagen);
 
-    $(datosImagen).on("load", function(event){
+        $(datosImagen).on("load", function(event) {
 
-      var rutaImagen = event.target.result;
-      
-      $(".previsualizar").attr("src", rutaImagen);
-    });
-  }
+            var rutaImagen = event.target.result;
+
+            $(".previsualizar").attr("src", rutaImagen);
+        });
+    }
 })
 
- /*==================================================
-  =            BLOQUEO MODAL EDITAR.             =
-  ==================================================*/
-
-  
-  /*==================================================
-  =            BLOQUEO MODAL EDITAR.             =
-  ==================================================*/
+/*==================================================
+ =            BLOQUEO MODAL EDITAR.             =
+ ==================================================*/
 
 
+/*==================================================
+=            BLOQUEO MODAL EDITAR.             =
+==================================================*/
 
-  var iconoBloqueoModal= document.getElementById("puertaBloqueoModal");
 
-  $(document).on("click", "#btnBloqueoModal",function() {
 
- 
+var iconoBloqueoModal = document.getElementById("puertaBloqueoModal");
+
+$(document).on("click", "#btnBloqueoModal", function() {
+
+
 
 
     var estadoBloqueoModal = $(this).attr("estadoBloqueoModal");
@@ -475,59 +475,59 @@ $(".nuevaFoto").change(function(){
 
     if (estadoBloqueoModal == 1) {
 
-      $(iconoBloqueoModal).removeClass('far fa-lock-open-alt');
+        $(iconoBloqueoModal).removeClass('far fa-lock-open-alt');
 
-      $(iconoBloqueoModal).addClass('far fa-lock-alt');
+        $(iconoBloqueoModal).addClass('far fa-lock-alt');
 
 
-      $(this).attr('estadoBloqueoModal', 2);
+        $(this).attr('estadoBloqueoModal', 2);
 
 
     } else {
 
-      $(iconoBloqueoModal).removeClass('far fa-lock-alt');
+        $(iconoBloqueoModal).removeClass('far fa-lock-alt');
 
-      $(iconoBloqueoModal).addClass('far fa-lock-open-alt');
+        $(iconoBloqueoModal).addClass('far fa-lock-open-alt');
 
 
-      $(this).attr('estadoBloqueoModal', 1);
+        $(this).attr('estadoBloqueoModal', 1);
 
     }
 
-  })
+})
 
-    /*==================================================
+/*==================================================
   =            ALARMA MODAL EDITAR.             =
   ==================================================*/
 
 
-  var botonAlarmaModal = document.getElementById("btnAlarmaModal");
+var botonAlarmaModal = document.getElementById("btnAlarmaModal");
 
-  var iconoAlarmaModal= document.getElementById("puertaAlarmaModal");
+var iconoAlarmaModal = document.getElementById("puertaAlarmaModal");
 
-  $(botonAlarmaModal).click(function(){
+$(botonAlarmaModal).click(function() {
 
     var alarmaPuertaModal = $(iconoAlarmaModal).attr("alarmaPuertaModal");
 
     if (alarmaPuertaModal == 1) {
 
 
-      $(iconoAlarmaModal).removeClass('far fa-siren');
+        $(iconoAlarmaModal).removeClass('far fa-siren');
 
-      $(iconoAlarmaModal).addClass('far fa-siren-on');
+        $(iconoAlarmaModal).addClass('far fa-siren-on');
 
-      $(iconoAlarmaModal).attr('alarmaPuertaModal', 0);
+        $(iconoAlarmaModal).attr('alarmaPuertaModal', 0);
 
     } else {
 
-      $(iconoAlarmaModal).removeClass('far fa-siren-on');
+        $(iconoAlarmaModal).removeClass('far fa-siren-on');
 
-      $(iconoAlarmaModal).addClass('far fa-siren');
+        $(iconoAlarmaModal).addClass('far fa-siren');
 
-      $(iconoAlarmaModal).attr('alarmaPuertaModal', 1);
+        $(iconoAlarmaModal).attr('alarmaPuertaModal', 1);
 
     }
-  })
+})
 
 
 
@@ -535,65 +535,65 @@ $(".nuevaFoto").change(function(){
   =            ESTADO MODAL EDITAR.             =
   ==================================================*/
 
-  var botonEstadoModal = document.getElementById("btnEstadoModal");
+var botonEstadoModal = document.getElementById("btnEstadoModal");
 
-  var iconoEstadoModal= document.getElementById("puertaEstadoModal");
+var iconoEstadoModal = document.getElementById("puertaEstadoModal");
 
-  $(botonEstadoModal).click(function(){
+$(botonEstadoModal).click(function() {
 
     var estadoPuertaModal = $(iconoEstadoModal).attr("puertaEstadoModal");
 
     if (estadoPuertaModal == 1) {
 
-      $(iconoEstadoModal).removeClass('far fa-door-closed');
+        $(iconoEstadoModal).removeClass('far fa-door-closed');
 
-      $(iconoEstadoModal).addClass('far fa-door-open');
+        $(iconoEstadoModal).addClass('far fa-door-open');
 
-      $(iconoEstadoModal).attr('puertaEstadoModal', 0);
+        $(iconoEstadoModal).attr('puertaEstadoModal', 0);
 
     } else {
 
-      $(iconoEstadoModal).removeClass('far fa-door-open');
+        $(iconoEstadoModal).removeClass('far fa-door-open');
 
-      $(iconoEstadoModal).addClass('far fa-door-closed');
+        $(iconoEstadoModal).addClass('far fa-door-closed');
 
-      $(iconoEstadoModal).attr('puertaEstadoModal', 1);
+        $(iconoEstadoModal).attr('puertaEstadoModal', 1);
 
     }
 
-  })
+})
 
-  /*=======  recargar estadisticas (puerta)  ========*/  
-  $(document).on('click', '.datosEst', function() { 
+/*=======  recargar estadisticas (puerta)  ========*/
+$(document).on('click', '.recarga', function() {
 
-      //Obtenemos datos formulario.
-      var date1 = $(this).attr('.date1');
-      var date2 = $(this).attr('.date2');
- 
-      var datos = new FormData();
+    //Obtenemos datos formulario.
+    var date1 = document.getElementsByName("date1");
+    var date2 = document.getElementsByName("date2");
 
-      datos.append("date1",date1);
-      datos.append("date2",date2);
-     
+    var datos = new FormData();
 
-      // AJAX.
-      $.ajax({  
-         url: 'ajax/puertas.ajax.php',
-         method: 'POST',
-         cache: false,
-         contentType: false,
-         processData: false,
-         data:  datos, 
-         dataType: 'json',
-         success:function(respuesta) {  
-             $('.chart').html(respuesta).fadeIn();
-         }  
-      });
-      return false;
-  })
+    datos.append("date1", date1);
+    datos.append("date2", date2);
 
 
-  /*=====  fin recargar estadisticas (puerta)  ======*/
+    // AJAX.
+    $.ajax({
+        url: 'ajax/puertas.ajax.php',
+        method: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: datos,
+        dataType: 'json',
+        success: function(respuesta) {
+            $('#chart').html(respuesta).fadeIn();
+        }
+    });
+    return false;
+})
+
+
+/*=====  fin recargar estadisticas (puerta)  ======*/
 
 // var idPuerta = $(this).attr("idPuerta");
 
