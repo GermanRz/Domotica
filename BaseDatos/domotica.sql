@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.11-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.14-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             10.3.0.5771
+-- HeidiSQL Versión:             11.0.0.5919
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -51,14 +51,13 @@ CREATE TABLE IF NOT EXISTS `temp_habitaciones` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.temp_habitaciones: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.temp_habitaciones: ~4 rows (aproximadamente)
 /*!40000 ALTER TABLE `temp_habitaciones` DISABLE KEYS */;
-INSERT INTO `temp_habitaciones` (`id`, `nombre`, `temp`, `hum`, `tvo`, `estado_temp`, `estado_hum`, `estado_tvo`, `min_temp`, `min_hum`, `min_tvo`, `max_temp`, `max_hum`, `max_tvo`) VALUES
-	(1, 'Fabian', '90', '90', '90', '1', '0', '0', '2', '3', '4', '5', '6', '7'),
-	(2, 'Chile', '80', '50', '30', '1', '0', '0', '9', '7', '5', '8', '6', '4'),
-	(3, 'German', '30', '90', '90', '1', '0', '0', '1', '1', '1', '1', '1', '1'),
-	(5, 'oscar', '15', '15', '15', '1', '0', '0', '1', '1', '1', '1', '1', '1'),
-	(12, 'Rango', '5', '5', '5', '0', '0', '0', '1', '2', '3', '4', '5', '6');
+REPLACE INTO `temp_habitaciones` (`id`, `nombre`, `temp`, `hum`, `tvo`, `estado_temp`, `estado_hum`, `estado_tvo`, `min_temp`, `min_hum`, `min_tvo`, `max_temp`, `max_hum`, `max_tvo`) VALUES
+  (1, 'Fabian', '90', '90', '90', '1', '0', '0', '2', '3', '4', '5', '6', '7'),
+  (2, 'Chile', '80', '50', '30', '1', '0', '0', '9', '7', '5', '8', '6', '4'),
+  (3, 'German', '30', '90', '90', '1', '0', '0', '1', '1', '1', '1', '1', '1'),
+  (5, 'oscar', '15', '15', '15', '1', '0', '0', '1', '1', '1', '1', '1', '1');
 /*!40000 ALTER TABLE `temp_habitaciones` ENABLE KEYS */;
 
 -- Volcando estructura para tabla domotica.temp_historico_dia
@@ -70,12 +69,16 @@ CREATE TABLE IF NOT EXISTS `temp_historico_dia` (
   `Gas` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla domotica.temp_historico_dia: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla domotica.temp_historico_dia: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `temp_historico_dia` DISABLE KEYS */;
-INSERT INTO `temp_historico_dia` (`Id_Habitacion`, `Fecha`, `Temp`, `Hum`, `Gas`) VALUES
-	(1, '2020-10-01 12:02:30', '5', '10', '20'),
-	(0, '2020-10-08 16:59:20', '10', '20', '30'),
-	(5, '2020-10-08 17:03:02', '15', '15', '15');
+REPLACE INTO `temp_historico_dia` (`Id_Habitacion`, `Fecha`, `Temp`, `Hum`, `Gas`) VALUES
+  (1, '2020-10-01 12:02:30', '5', '10', '20'),
+  (0, '2020-10-08 16:59:20', '10', '20', '30'),
+  (5, '2020-10-08 17:03:02', '15', '15', '15'),
+  (1, '2020-10-01 12:02:30', '5', '10', '20'),
+  (0, '2020-10-08 16:59:20', '10', '20', '30'),
+  (5, '2020-10-08 17:03:02', '15', '15', '15'),
+  (1, '2020-10-28 18:54:23', '90', '90', '90');
 /*!40000 ALTER TABLE `temp_historico_dia` ENABLE KEYS */;
 
 -- Volcando estructura para tabla domotica.temp_historico_mes_promedio
@@ -107,19 +110,19 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 -- Volcando datos para la tabla domotica.usuarios: ~6 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`, `estado`, `ultimo_login`, `fecha`) VALUES
-	(29, 'administrador', 'admin', '$2y$10$2xdGX0v0nGMA9j/pgsZnsuC64lPAvt0D7DKiuSiuQBKZz/d4fxb3S', 'Administrador', 'images/usuarios/admin/746.png', '1', '2020-10-19 19:28:21', NULL),
-	(61, 'juan valencia', 'juan', '$2y$10$jDbWrrPWtasESGaVDvs8X.Ct6XreSIR40JtelKSd4QmjMFoP0aaAS', 'Administrador', 'images/usuarios/juan/213.png', '1', '2020-05-14 16:45:02', NULL),
-	(65, 'andres gonzales', 'andres', '$2y$10$yu4EH9H19oJvVusekRhmkO7o/YXClDimJdEFFa2SGrJMrW68OoNXa', 'Invitado', 'images/usuarios/andres/302.png', '0', '2020-05-13 22:48:35', NULL),
-	(71, 'monica aristizabal', 'monica', '$2y$10$sm3lslO0b5gpYZgaJSfsGOofljBWkAzDZvSpePLXWEiF05yz3N2BC', 'Invitado', 'images/usuarios/monica/966.png', '0', '2020-05-11 13:50:07', NULL),
-	(73, 'german ramirez', 'german', '$2y$10$QH8Uky5T8uVes6S1NJ292epvzug3E1rgQxQl5OXsHe1pBt7ox/vwq', 'Invitado', 'images/usuarios/german/888.png', '1', '2020-05-14 16:45:52', NULL),
-	(74, 'Chile', 'Chile', '$2y$10$km1LLJ.rno91NQGGYXBb7Oy/6rcpAwbLO/VIUeASZmsHPlwFCFYGC', 'Invitado', '', '1', '2020-10-05 16:55:19', NULL);
+REPLACE INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`, `estado`, `ultimo_login`, `fecha`) VALUES
+  (29, 'administrador', 'admin', '$2y$10$2xdGX0v0nGMA9j/pgsZnsuC64lPAvt0D7DKiuSiuQBKZz/d4fxb3S', 'Administrador', 'images/usuarios/admin/746.png', '1', '2020-10-28 18:38:00', NULL),
+  (61, 'juan valencia', 'juan', '$2y$10$jDbWrrPWtasESGaVDvs8X.Ct6XreSIR40JtelKSd4QmjMFoP0aaAS', 'Administrador', 'images/usuarios/juan/213.png', '1', '2020-05-14 16:45:02', NULL),
+  (65, 'andres gonzales', 'andres', '$2y$10$yu4EH9H19oJvVusekRhmkO7o/YXClDimJdEFFa2SGrJMrW68OoNXa', 'Invitado', 'images/usuarios/andres/302.png', '0', '2020-05-13 22:48:35', NULL),
+  (71, 'monica aristizabal', 'monica', '$2y$10$sm3lslO0b5gpYZgaJSfsGOofljBWkAzDZvSpePLXWEiF05yz3N2BC', 'Invitado', 'images/usuarios/monica/966.png', '0', '2020-05-11 13:50:07', NULL),
+  (73, 'german ramirez', 'german', '$2y$10$QH8Uky5T8uVes6S1NJ292epvzug3E1rgQxQl5OXsHe1pBt7ox/vwq', 'Invitado', 'images/usuarios/german/888.png', '1', '2020-05-14 16:45:52', NULL),
+  (74, 'Chile', 'Chile', '$2y$10$km1LLJ.rno91NQGGYXBb7Oy/6rcpAwbLO/VIUeASZmsHPlwFCFYGC', 'Invitado', '', '1', '2020-10-05 16:55:19', NULL);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 -- Volcando estructura para disparador domotica.actualiza_temp_habitaciones_BU
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
-CREATE TRIGGER `actualiza_temp_habitaciones_BU` BEFORE UPDATE ON `temp_habitaciones` FOR EACH ROW INSERT INTO registro_dia(Id_Habitacion, Fecha, Temp, Hum, Gas)
+CREATE TRIGGER `actualiza_temp_habitaciones_BU` BEFORE UPDATE ON `temp_habitaciones` FOR EACH ROW INSERT INTO temp_historico_dia(Id_Habitacion, Fecha, Temp, Hum, Gas)
 
 VALUES(NEW.id, NOW(), NEW.temp, NEW.hum, NEW.tvo)//
 DELIMITER ;
