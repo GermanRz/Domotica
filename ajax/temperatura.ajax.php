@@ -22,7 +22,7 @@ class ajaxTemperatura
 	}
 
 	/*=============================================
-	=            ACTIVAR Temperatura            =
+	=           ACTIVAR Temperatura            =
 	=============================================*/
 
 	public $activarId;
