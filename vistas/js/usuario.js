@@ -145,7 +145,6 @@ $(document).on("click",".btnActivar", function() {
 
 
 	})
-
 	if (estadoUsuario == 0) {
 
 		$(this).removeClass('btn-success');

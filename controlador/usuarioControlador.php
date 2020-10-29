@@ -66,7 +66,7 @@
 							$item2 ="id";
 							$valor2 =$respuesta["id"];
 
-							$ultimoLogin = usuarioModelo:: mdlActualizarUsuarios($tabla, $item1, $valor1, $item2, $valor2);
+							$ultimoLogin = usuarioModelo::mdlActualizarUsuarios($tabla, $item1, $valor1, $item2, $valor2);
 
 							if ($ultimoLogin == "ok") {
 								

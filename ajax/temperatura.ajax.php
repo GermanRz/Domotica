@@ -22,7 +22,7 @@ class ajaxTemperatura
 	}
 
 	/*=============================================
-	=            ACTIVAR USUARIO            =
+	=            ACTIVAR Temperatura            =
 	=============================================*/
 
 	public $activarId;
@@ -37,11 +37,59 @@ class ajaxTemperatura
 
 		$valor1 = $this->activarTemp;
 
-		$item2 ="id";
+		$item2 = "id";
 		
-		$valor2 =$this->activarId;
+		$valor2 = $this->activarId;
+
 
 		$respuesta = temperaturaModelo::mdlActualizarTemperatura($tabla, $item1, $valor1, $item2, $valor2);
+
+	}
+
+	/*=============================================
+	=            ACTIVAR Humedad            =
+	=============================================*/
+	// public $activarIdH;
+	public $activarHum;
+
+	public function ajaxActivarHum()
+	{
+
+		$tabla = "temp_habitaciones";
+
+		$item1  = "estado_hum";
+
+		$valor1 = $this->activarHum;
+
+		$item2 = "id";
+		
+		$valor2 = $this->activarId;
+
+
+		$respuesta = temperaturaModelo::mdlActualizarHumedad($tabla, $item1, $valor1, $item2, $valor2);
+
+	}
+
+	/*=============================================
+	=            ACTIVAR tvo            =
+	=============================================*/
+	public $activarTvo;
+
+	public function ajaxActivarTvo()
+	{
+
+		$tabla = "temp_habitaciones";
+
+		$item1  = "estado_tvo";
+
+		$valor1 = $this->activarTvo;
+
+		$item2 = "id";
+		
+		$valor2 = $this->activarId;
+
+
+		$respuesta = temperaturaModelo::mdlActualizarTVO($tabla, $item1, $valor1, $item2, $valor2);
 
 	}
 }
@@ -59,7 +107,7 @@ if (isset($_POST["idTemperatura"])) {
 }
 
 /*=============================================
-=            ACTIVAR USUARIO            =
+=            ACTIVAR TEMPERATURA            =
 =============================================*/
 if (isset($_POST["activarTemp"])) {
 
@@ -70,5 +118,34 @@ if (isset($_POST["activarTemp"])) {
 	$activar-> activarTemp = $_POST["activarTemp"];
 
 	$activar-> ajaxActivarTemp();
+
+}
+
+/*=============================================
+=            ACTIVAR HUMEDAD            =
+=============================================*/
+if (isset($_POST["activarHum"])) {
+
+	$activar = new ajaxTemperatura();
+
+	$activar-> activarId = $_POST["activarId"];
+
+	$activar-> activarHum = $_POST["activarHum"];
+
+	$activar-> ajaxActivarHum();
+
+}
+/*=============================================
+=            ACTIVAR TVO            =
+=============================================*/
+if (isset($_POST["activarTvo"])) {
+
+	$activar = new ajaxTemperatura();
+
+	$activar-> activarId = $_POST["activarId"];
+
+	$activar-> activarTvo = $_POST["activarTvo"];
+
+	$activar-> ajaxActivarTvo();
 
 }

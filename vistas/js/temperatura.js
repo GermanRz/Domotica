@@ -81,35 +81,34 @@ $(document).on("click",".btnActivarTemp", function() {
 	datos.append("activarTemp",estadoTemp);
 
 	$.ajax({
-
 		url: 'ajax/temperatura.ajax.php',
-		method: 'POST',
-		data: datos,
-		cache: false,
-		contentType: false,
-		processData: false,
-		success:function(respuesta){
+			method: 'POST',
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:function(respuesta){
 
-			if (window.matchMedia("(max-width:767px)")) {
+				if (window.matchMedia("(max-width:767px)")) {
 
-				Swal.fire({
+					Swal.fire({
 
-					type: 'success',
-					title: '<span Class="text-white">¡El estado de temperatura se a actualizado correctamente!</span>',
-					background: '#343a40',
-					showConfirmButton: true,
-					confirmButtonColor: '#28a745',
-					confirmButtonText: 'Ok',
-					closeOnConfirm: false 
+						type: 'success',
+						title: '<span Class="text-white">¡El estado de temperatura se a actualizado correctamente!</span>',
+						background: '#343a40',
+						showConfirmButton: true,
+						confirmButtonColor: '#28a745',
+						confirmButtonText: 'Ok',
+						closeOnConfirm: false 
 
-				}).then((result)=>{
+					}).then((result)=>{
 
-					if(result.value){
-						window.location = 'temperatura';
-					}   
-					   
-				});
-			}
+						if(result.value){
+							window.location = 'temperatura';
+						}   
+						   
+					});
+				}
 		}
 	})
 
@@ -126,6 +125,136 @@ $(document).on("click",".btnActivarTemp", function() {
 		$(this).addClass('btn-success');
 		$(this).html('Activado');
 		$(this).attr('estadoTemp',0);
+
+	}
+
+});
+
+/*=============================================
+=          ACTIVAR ESTADO HUMEDAD            =
+=============================================*/
+$(document).on("click",".btnActivarHum", function() {
+	
+	var idHumedad = $(this).attr("idHumedad");
+
+	var estadoHum = $(this).attr("estadoHum");
+
+	var datos = new FormData();
+
+	datos.append("activarId",idHumedad);
+
+	datos.append("activarHum",estadoHum);
+
+	$.ajax({
+		url: 'ajax/temperatura.ajax.php',
+			method: 'POST',
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:function(respuesta){
+
+				if (window.matchMedia("(max-width:767px)")) {
+
+					Swal.fire({
+
+						type: 'success',
+						title: '<span Class="text-white">¡El estado de la humedad se a actualizado correctamente!</span>',
+						background: '#343a40',
+						showConfirmButton: true,
+						confirmButtonColor: '#28a745',
+						confirmButtonText: 'Ok',
+						closeOnConfirm: false 
+
+					}).then((result)=>{
+
+						if(result.value){
+							window.location = 'temperatura';
+						}   
+						   
+					});
+				}
+		}
+	})
+
+	if (estadoHum == 0) {
+
+		$(this).removeClass('btn-success');
+		$(this).addClass('btn-danger');
+		$(this).html('desactivado');
+		$(this).attr('estadoHum',1);
+
+	} else {
+
+		$(this).removeClass('btn-danger');
+		$(this).addClass('btn-success');
+		$(this).html('Activado');
+		$(this).attr('estadoHum',0);
+
+	}
+
+});
+
+/*=============================================
+=          ACTIVAR ESTADO HUMEDAD            =
+=============================================*/
+$(document).on("click",".btnActivarTvo", function() {
+	
+	var idTvo = $(this).attr("idTvo");
+
+	var estadoTvo = $(this).attr("estadoTvo");
+
+	var datos = new FormData();
+
+	datos.append("activarId",idTvo);
+
+	datos.append("activarTvo",estadoTvo);
+
+	$.ajax({
+		url: 'ajax/temperatura.ajax.php',
+			method: 'POST',
+			data: datos,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success:function(respuesta){
+
+				if (window.matchMedia("(max-width:767px)")) {
+
+					Swal.fire({
+
+						type: 'success',
+						title: '<span Class="text-white">¡El estado del tvo se a actualizado correctamente!</span>',
+						background: '#343a40',
+						showConfirmButton: true,
+						confirmButtonColor: '#28a745',
+						confirmButtonText: 'Ok',
+						closeOnConfirm: false 
+
+					}).then((result)=>{
+
+						if(result.value){
+							window.location = 'temperatura';
+						}   
+						   
+					});
+				}
+		}
+	})
+
+	if (estadoTvo == 0) {
+
+		$(this).removeClass('btn-success');
+		$(this).addClass('btn-danger');
+		$(this).html('desactivado');
+		$(this).attr('estadoTvo',1);
+
+	} else {
+
+		$(this).removeClass('btn-danger');
+		$(this).addClass('btn-success');
+		$(this).html('Activado');
+		$(this).attr('estadoTvo',0);
 
 	}
 

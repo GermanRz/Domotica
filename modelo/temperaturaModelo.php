@@ -37,7 +37,7 @@
 			
         }
         
-        static public function mdlHistoricoTemperatura($tabla){
+    static public function mdlHistoricoTemperatura($tabla){
             $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 
             $stmt -> execute();
@@ -86,7 +86,7 @@
             $stmt = null;
        	}
 
-       	static public function mdlBorrarCuarto($tabla, $datos){
+    static public function mdlBorrarCuarto($tabla, $datos){
         
           $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla  WHERE id = :id");
             
@@ -108,7 +108,7 @@
         
         }
 
-        static public function mdlEditarTemperatura($tabla, $datos){
+    static public function mdlEditarTemperatura($tabla, $datos){
 
           $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET nombre = :nombre,  min_temp = :min_temp, min_hum = :min_hum, min_tvo = :min_tvo,  max_temp = :max_temp, max_hum = :max_hum, max_tvo = :max_tvo WHERE id = :id");
 
@@ -146,30 +146,90 @@
 
         }
 
-        /*=============================================
-        =            ACTUALIZAR TEMPERATURA           =
-        =============================================*/
-        static public function mdlActualizarTemperatura($tabla, $item1, $valor1, $item2, $valor2){
+    /*=============================================
+    =            ACTUALIZAR TEMPERATURA           =
+    =============================================*/
+    static public function mdlActualizarTemperatura($tabla, $item1, $valor1, $item2, $valor2){
 
-            $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
-  
-            $stmt -> bindparam(":".$item1, $valor1, PDO::PARAM_STR);
-  
-            $stmt -> bindparam(":".$item2, $valor2, PDO::PARAM_STR);
-  
-            if($stmt -> execute()){
-  
-                  return "ok";
-  
-              }else{
-  
-                  return "error";
-  
-              }
-  
-              $stmt -> close();
-  
-              $stmt = null;
-  
-          }
+      var_dump($tabla, $item1, $valor1, $item2, $valor2);
+
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+
+      $stmt->bindparam(":" . $item1, $valor1, PDO::PARAM_STR);
+
+      $stmt->bindparam(":" . $item2, $valor2, PDO::PARAM_STR);
+
+      if ($stmt->execute()) {
+        
+        return "ok";
+
+      } else {
+
+        return "error";
+
+      }
+
+      $stmt->close();
+
+      $stmt = null;
+
+    }
+
+    /*=============================================
+    =            ACTUALIZAR HUMEDAD           =
+    =============================================*/
+    static public function mdlActualizarHumedad($tabla, $item1, $valor1, $item2, $valor2){
+
+      var_dump($tabla, $item1, $valor1, $item2, $valor2);
+
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+
+      $stmt->bindparam(":" . $item1, $valor1, PDO::PARAM_STR);
+
+      $stmt->bindparam(":" . $item2, $valor2, PDO::PARAM_STR);
+
+      if ($stmt->execute()) {
+        
+        return "ok";
+
+      } else {
+
+        return "error";
+
+      }
+
+      $stmt->close();
+
+      $stmt = null;
+
+    }
+
+    /*=============================================
+    =            ACTUALIZAR TVO           =
+    =============================================*/
+    static public function mdlActualizarTVO($tabla, $item1, $valor1, $item2, $valor2){
+
+      var_dump($tabla, $item1, $valor1, $item2, $valor2);
+
+      $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE $item2 = :$item2");
+
+      $stmt->bindparam(":" . $item1, $valor1, PDO::PARAM_STR);
+
+      $stmt->bindparam(":" . $item2, $valor2, PDO::PARAM_STR);
+
+      if ($stmt->execute()) {
+        
+        return "ok";
+
+      } else {
+
+        return "error";
+
+      }
+
+      $stmt->close();
+
+      $stmt = null;
+
+    }
 	}
