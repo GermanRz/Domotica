@@ -33,15 +33,12 @@
     CIERRE DE HEAD
     =================================-->
 
-
-
   <section class="content">
 
     <!--================================
           VER INFORME, AGREGAR PUERTAS
           =================================-->
     <div class="container-fluid">
-
       <div class="card">
 
         <div class="card-header" style="background: #343a40; color:#fff;">
@@ -52,7 +49,6 @@
           </h3>
           <!-- /.puertas head -->
           <!-- /.card-header -->
-
         </div>
 
         <div class="card-body" style="background: #6c757d; color:#fff;">
@@ -123,7 +119,6 @@
 
           <div class="card-body-contenido">
 
-
             <!--================================
                 REVISAR PARA HACER UN RELOG
                 =================================-->
@@ -140,112 +135,113 @@
                   <th>Opciones</th>
                 </tr>
               </thead>
+
               <tbody>
 
-
                 <?php
-                $item = null;
-                $valor = null;
-                $puertas = PuertasControlador::ctrMostrarPuerta($item, $valor);
 
-                foreach ($puertas as $key => $value) {
-                  echo '<tr>
-                      <td><b>' . $value["numero"] . '</b></td>
-                      <td><b>' . $value["nombre"] . '</b></td>';
+                    $item = null;
+                    $valor = null;
+                    $puertas = PuertasControlador::ctrMostrarPuerta($item, $valor);
 
-                  if ($value["foto"] != "") {
-                    echo '<td>
-                        <img src="' . $value["foto"] . '" width="40px">';
-                  } else {
-                    echo '<td>
-                        <img src="images/fotoPuertas/puertaDefecto.png" class="img-thumbnail" width="40px">';
-                  }
-                  echo '</td>
-                      <td>
-                      ';
+                    foreach ($puertas as $key => $value) {
+                      echo '<tr>
+                          <td><b>' . $value["numero"] . '</b></td>
+                          <td><b>' . $value["nombre"] . '</b></td>';
 
-                  if ($value["sensorBloqueo"] == 3) {
+                      if ($value["foto"] != "") {
+                        echo '<td>
+                            <img src="' . $value["foto"] . '" width="40px">';
+                      } else {
+                        echo '<td>
+                            <img src="images/fotoPuertas/puertaDefecto.png" class="img-thumbnail" width="40px">';
+                      }
+                      echo '</td>
+                          <td>
+                          ';
 
-                    echo '<button class="btn btn-outline-primary buttonFondo btnPtaBloqueoEstado" idPuerta="' . $value["numero"] . '" estadoBloqueoPuerta="2">
+                      if ($value["sensorBloqueo"] == 3) {
 
-                        <i id="puertaAbierta" class="fa fa-door-open"></i>
+                        echo '<button class="btn btn-outline-primary buttonFondo btnPtaBloqueoEstado" idPuerta="' . $value["numero"] . '" estadoBloqueoPuerta="2">
 
-
-                        </button>';
-                  } else if ($value["sensorBloqueo"] == 2) {
-
-                    echo '<button class="btn btn-outline-primary buttonFondo btnPtaBloqueoEstado" idPuerta="' . $value["numero"] . '" estadoBloqueoPuerta="3">
-
-                        <i id="puertaAbierta" class="fa fa-door-closed"></i>
+                            <i id="puertaAbierta" class="fa fa-door-open"></i>
 
 
-                        </button>';
-                  } else if ($value["sensorBloqueo"] == 1) {
+                            </button>';
+                      } else if ($value["sensorBloqueo"] == 2) {
 
-                    echo '<button class="btn btn-outline-primary buttonFondo btnPtaBloqueoEstado" disabled="true" idPuerta="' . $value["numero"] . '" estadoBloqueoPuerta="3">
+                        echo '<button class="btn btn-outline-primary buttonFondo btnPtaBloqueoEstado" idPuerta="' . $value["numero"] . '" estadoBloqueoPuerta="3">
 
-                        <i id="puertaAbierta" class="fa fa-door-closed"></i>
-
-
-                        </button>';
-                  }
-
-                  if ($value["alarma"] == 3) {
-
-                    echo '<button class="btn btn-outline-primary buttonFondo btnMonitorear" idPuerta="' . $value["numero"] . '" estadoAlarma="2">
-
-                        <i id="puertaAlarma" class="far fa-siren"></i>
+                            <i id="puertaAbierta" class="fa fa-door-closed"></i>
 
 
-                        </button>';
-                  } else if ($value["alarma"] == 2) {
+                            </button>';
+                      } else if ($value["sensorBloqueo"] == 1) {
 
-                    echo '<button class="btn btn-outline-primary buttonFondo btnMonitorear" idPuerta="' . $value["numero"] . '" estadoAlarma="3">
+                        echo '<button class="btn btn-outline-primary buttonFondo btnPtaBloqueoEstado" disabled="true" idPuerta="' . $value["numero"] . '" estadoBloqueoPuerta="3">
 
-                        <i id="puertaAlarma" class="far fa-siren-on"></i>
-
-
-                        </button>';
-                  } else if ($value["alarma"] == 1) {
-
-                    echo '<button class="btn btn-outline-primary buttonFondo btnMonitorear" idPuerta="' . $value["numero"] . '" disabled="true" estadoAlarma="3">
-
-                        <i id="puertaAlarma" class="far fa-siren-on"></i>
+                            <i id="puertaAbierta" class="fa fa-door-closed"></i>
 
 
-                        </button>';
-                  }
+                            </button>';
+                      }
 
-                  echo '
+                      if ($value["alarma"] == 3) {
 
+                        echo '<button class="btn btn-outline-primary buttonFondo btnMonitorear" idPuerta="' . $value["numero"] . '" estadoAlarma="2">
 
-                      <button class="btn btn-outline-info buttonFondo" data-toggle="modal" data-target="#modalHistorialPuerta">
-                      <i class="fas fa-history"></i>
-                      </button>
-
-                      </td>';
-
-                  if ($value["estado"] == 1) {
-
-                    echo '<td><button class="btn btn-danger btn-xs btnPtaEstado" idPuerta="' . $value["numero"] . '" estadoPuerta="0">Mal estado</button></td>';
-                  } else {
-
-                    echo '<td><button class="btn btn-success btn-xs btnPtaEstado" idPuerta="' . $value["numero"] . '" estadoPuerta="1">Buen estado</button></td>';
-                  }
-
-                  echo '<td>
-                      
-                      <button class="btn btn-outline-warning btnEditarPuerta buttonFondo" idPuerta="' . $value["numero"] . '" data-toggle="modal" data-target="#modalEditarPuerta">
-                      <i class="fas fa-pencil-alt"></i>
-                      </button>
-
-                      <button class="btn btn-danger btnEliminarPuerta" idPuerta="' . $value["numero"] . '" fotoPuerta="' . $value["foto"] . '" nombrePuerta="' . $value["nombre"] . '"><i class="fa fa-times"></i></button>
+                            <i id="puertaAlarma" class="far fa-siren"></i>
 
 
-                      </td>
-                      </div>
-                      ';
-                }
+                            </button>';
+                      } else if ($value["alarma"] == 2) {
+
+                        echo '<button class="btn btn-outline-primary buttonFondo btnMonitorear" idPuerta="' . $value["numero"] . '" estadoAlarma="3">
+
+                            <i id="puertaAlarma" class="far fa-siren-on"></i>
+
+
+                            </button>';
+                      } else if ($value["alarma"] == 1) {
+
+                        echo '<button class="btn btn-outline-primary buttonFondo btnMonitorear" idPuerta="' . $value["numero"] . '" disabled="true" estadoAlarma="3">
+
+                            <i id="puertaAlarma" class="far fa-siren-on"></i>
+
+
+                            </button>';
+                      }
+
+                      echo '
+
+
+                          <button class="btn btn-outline-info buttonFondo" data-toggle="modal" data-target="#modalHistorialPuerta">
+                          <i class="fas fa-history"></i>
+                          </button>
+
+                          </td>';
+
+                      if ($value["estado"] == 1) {
+
+                        echo '<td><button class="btn btn-danger btn-xs btnPtaEstado" idPuerta="' . $value["numero"] . '" estadoPuerta="0">Mal estado</button></td>';
+                      } else {
+
+                        echo '<td><button class="btn btn-success btn-xs btnPtaEstado" idPuerta="' . $value["numero"] . '" estadoPuerta="1">Buen estado</button></td>';
+                      }
+
+                      echo '<td>
+                          
+                          <button class="btn btn-outline-warning btnEditarPuerta buttonFondo" idPuerta="' . $value["numero"] . '" data-toggle="modal" data-target="#modalEditarPuerta">
+                          <i class="fas fa-pencil-alt"></i>
+                          </button>
+
+                          <button class="btn btn-danger btnEliminarPuerta" idPuerta="' . $value["numero"] . '" fotoPuerta="' . $value["foto"] . '" nombrePuerta="' . $value["nombre"] . '"><i class="fa fa-times"></i></button>
+
+
+                          </td>
+                          </div>
+                          ';
+                    }
 
                 ?>
 
@@ -259,6 +255,8 @@
         <!--================================
           CIERRE DE VER INFORME, AGREGAR PUERTAS
           =================================-->
+      </div> 
+    </div>     
   </section>
   <!-- CERRAR EL CONTENT -->
 </div>
@@ -585,7 +583,7 @@
       <form role="form" method="post" enctype="multipart/form-data">
 
         <!--================================
-              CABEZA DEL MODAL
+                      CABEZA DEL MODAL
               =================================-->
 
         <div class="modal-header" style="background: #343a40; color: #fff">
@@ -601,59 +599,42 @@
         </div>
 
         <!--================================
-              CUERPO DEL MODAL
+                    CUERPO DEL MODAL
               =================================-->
 
         <div class="modal-body">
-          <form class="form-inline" method="POST" id="form" action="">
-            <div class="container row">
-              <div class="col-sm-5">
-                <label>Fecha Desde:</label>
-                <input type="date" class="form-control date1" value="" name="date1" />
+          
+          <div class="col-md-12">
+            <!-- bar chart -->
+            <div class="card card-success">
+              <div class="card-body" style="background-color: #343a40; color: #fff;">
+                <div class="chart" >
+                  <canvas id="barChartSen" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
               </div>
-              <div class="col-sm-5" style="margin: 0px 10px;">
-                <label>Hasta</label>
-                <input type="date" class="form-control date2" value="" name="date2" />
-              </div>
-              <div style="margin: 32px 0px;">
-                <button class="btn btn-primary recarga" id="datosSen" name="search"><span class="fas fa-search"></span></button>
-                <button type="reset" class="btn btn-success" style="margin: 0px 5px; "><span class="fas fa-sync-alt"></span></button>
-              </div>
+              <!-- /.card-body -->
             </div>
-          </form>
-        </div>
-
-        <div class="col-md-12">
-          <!-- bar chart -->
-          <div class="card card-success">
-            <div class="card-body" style="background-color: #343a40; color: #fff;">
-              <div class="chart" >
-                <canvas id="barChartSen" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-            </div>
-            <!-- /.card-body -->
+            <!-- fin bar chart -->
           </div>
-          <!-- fin bar chart -->
+
         </div>
 
-    </div>
-
-    <!--================================
-              FOOTER DEL MODAL
+              <!--================================
+                        FOOTER DEL MODAL
               =================================-->
 
-    <div class="modal-footer justify-content-between" style="background: #343a40;">
+        <div class="modal-footer justify-content-between" style="background: #343a40;">
 
-      <button type="button" class="btn btn-primary" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Salir</button>
+
+        </div>
+
+      </form>
 
     </div>
-
-    </form>
-
+    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
@@ -691,55 +672,38 @@
               =================================-->
 
         <div class="modal-body">
-          <form class="form-inline" method="POST" id="form" action="">
-            <div class="container row">
-              <div class="col-sm-5">
-                <label>Fecha Desde:</label>
-                <input type="date" class="form-control date1" value="" name="date1" />
+          
+          <div class="col-md-12">
+            <!-- bar chart -->
+            <div class="card card-success">
+              <div class="card-body" style="background-color: #343a40; color: #fff;">
+                <div class="chart" >
+                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
               </div>
-              <div class="col-sm-5" style="margin: 0px 10px;">
-                <label>Hasta</label>
-                <input type="date" class="form-control date2" value="" name="date2" />
-              </div>
-              <div style="margin: 32px 0px;">
-                <button class="btn btn-primary recarga" id="datosEst" name="search"><span class="fas fa-search"></span></button>
-                <button type="reset" class="btn btn-success" style="margin: 0px 5px; "><span class="fas fa-sync-alt"></span></button>
-              </div>
+              <!-- /.card-body -->
             </div>
-          </form>
-        </div>
-
-        <div class="col-md-12">
-          <!-- bar chart -->
-          <div class="card card-success">
-            <div class="card-body" style="background-color: #343a40; color: #fff;">
-              <div class="chart" >
-                <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-            </div>
-            <!-- /.card-body -->
+            <!-- fin bar chart -->
           </div>
-          <!-- fin bar chart -->
+
         </div>
 
-    </div>
-
-    <!--================================
-              FOOTER DEL MODAL
+              <!--================================
+                        FOOTER DEL MODAL
               =================================-->
 
-    <div class="modal-footer justify-content-between" style="background: #343a40;">
+        <div class="modal-footer justify-content-between" style="background: #343a40;">
 
-      <button type="button" class="btn btn-primary" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Salir</button>
+
+        </div>
+
+      </form>
 
     </div>
-
-    </form>
-
-  </div>
   <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
@@ -992,6 +956,29 @@
 $borrarPuertas = new PuertasControlador();
 $borrarPuertas->ctrBorrarPuerta();
 ?>
+
+<!--============================================
+=     Estadisticas puertas            =
+============================================-->
+<?php
+  // error_reporting(0); //para evitar errores de notificacion
+
+  // $item = null;
+  // $valor = null;
+  // $orden = "id";
+  
+
+
+  $fechaHoy = date("Y")."-".date("m")."-".date("d");
+  $respuesta = PuertasControlador::ctrEstadisticas($fechaHoy, $fechaHoy);
+  var_dump("que hay ", $respuesta);
+  
+  
+
+?>
+
+<!--===== fin Estadisticas puertas  ======-->
+
 
 
 <script>

@@ -161,25 +161,63 @@
         
         }
 
-         /*==========================================
-       	=            Estadisticas Puertas            =
-       	==========================================*/
+        /*=============================================
+        LISTAR ESTADISTICAS EN RANGO DE FECHAS
+        =============================================*/
 
-           static public function mdlEstadisticas($tabla, $date1, $date2){
+        static public function mdlEstadisticas($tabla, $fechaInicial, $fechaFinal){
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $tabla.fechas BETWEEN :date1 AND :date2");
+        if($fechaInicial == null){
 
-            $stmt->bindValue(":date1",$date1);
-            $stmt->bindValue(":date2",$date2);
-            
+          $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC");
+          //$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+          $stmt -> execute();
+          return $stmt -> fetchAll();
+
+        }else
+          if ($fechaInicial == $fechaFinal){
+
+            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha LIKE '%$fechaFinal%'");
+            // $stmt -> bindParam(":fecha", $fechaFinal, PDO::PARAM_STR);
             $stmt -> execute();
-
             return $stmt -> fetchAll();
-            
-            $stmt -> close();
 
-            $stmt = null;
-        }
-        // SELECT COUNT(*) FROM $tabla WHERE $item=$valor
+          }else{
+
+            $fechaActual = new DateTime();
+            $fechaActual -> add(new DateInterval("P1D"));
+            $fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+            $fechaFinal2 = new DateTime($fechaFinal);
+            $fechaFinal2 -> add(new DateInterval("P1D"));
+            $fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+
+            if($fechaFinalMasUno == $fechaActualMasUno){
+
+              $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'");
+
+            }else{
+
+              $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'");
+
+            }
+
+
+            
+            // $stmt -> bindParam(":fechaInicial", $fechaInicial, PDO::PARAM_STR);
+            // $stmt -> bindParam(":fechaFinal", $fechaFinal, PDO::PARAM_STR);
+            $stmt -> execute();
+            return $stmt -> fetchAll(); 
+
+          }
+        
+        $stmt -> close();
+        $stmt = null;
+
+
+        }//fin del metodo de mostrar ventas
+
+        
         /*==========================================*/
 	}
