@@ -30,6 +30,30 @@ $(".tablas").DataTable({
 $(".paginate_page").text("Página");
 $(".paginate_of").text($(".paginate_of").text().replace("of","de"));
 
+<<<<<<< HEAD
+=======
+window.addEventListener("load",function() {
+  
+        //oculta la barra de navegación de dispositivos moviles
+        setTimeout(function(){
+            window.scrollTo(0, 1);
+          }, 0);
+
+
+        //Permite que muestre la seleccion de la pagina actual
+        var url = window.location;
+
+        // treeview
+        $('ul.nav-treeview a').filter(function() {
+                return this.href == url;
+        }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
+
+        // sidebar menu pero no afecta treeview
+        $('ul.nav-sidebar a').filter(function() {
+                return this.href == url;
+        }).addClass('active');
+});
+>>>>>>> c3e92259dd885097d43d5a9097c72db33a2b4205
 //Colorpicker
 $('.my-colorpicker1').colorpicker()
 //color picker with addon
@@ -38,5 +62,8 @@ $('.my-colorpicker2').colorpicker()
 $('.my-colorpicker2').on('colorpickerChange', function(event) {
   $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
 });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c3e92259dd885097d43d5a9097c72db33a2b4205

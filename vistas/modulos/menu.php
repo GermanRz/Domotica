@@ -195,11 +195,24 @@
             
           </li>
 
+<<<<<<< HEAD
           <li class="nav-item has-treeview">
 
             <a href="ModuloReportes" class="nav-link">
 
               <i class="nav-icon fas fa-lightbulb"></i>
+=======
+
+          <!-- =============================================
+          =           REPORTES           =
+          ============================================= -->
+
+          <li class="nav-item has-treeview">
+
+            <a href="reportes" class="nav-link">
+
+             <i class="nav-icon fas fa-check-double"></i>
+>>>>>>> c3e92259dd885097d43d5a9097c72db33a2b4205
 
               <p>
 
@@ -210,6 +223,10 @@
             </a>
             
           </li>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> c3e92259dd885097d43d5a9097c72db33a2b4205
         
         </ul>
 
