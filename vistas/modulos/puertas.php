@@ -248,18 +248,22 @@
               </tbody>
 
             </table>
-
-          </div>
-
-        </div>
         <!--================================
           CIERRE DE VER INFORME, AGREGAR PUERTAS
           =================================-->
-      </div> 
+          
+          </div>
+          </div>
+          </div>
     </div>     
   </section>
-  <!-- CERRAR EL CONTENT -->
+  <!-- relleno de espacio en blanco -->
+  <?php
+  echo "⠀";
+  ?>
 </div>
+  <!-- CERRAR EL CONTENT -->
+
 <!-- /.CIERRA DEL BODY -->
 
 
@@ -971,7 +975,7 @@ $borrarPuertas->ctrBorrarPuerta();
 
   $fechaHoy = date("Y")."-".date("m")."-".date("d");
   $respuesta = PuertasControlador::ctrEstadisticas($fechaHoy, $fechaHoy);
-  var_dump("que hay ", $respuesta);
+  
   
   
 
