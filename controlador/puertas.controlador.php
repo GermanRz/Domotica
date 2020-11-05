@@ -437,16 +437,15 @@
 	=      Estadisticas Puertas            =
 	======================================*/
 
-		static public function ctrEstadisticas($fechaInicial, $fechaFinal){
-
-			$tabla = "estadisticas";
-
-			$respuesta = puertaModelo::mdlEstadisticas($tabla,$fechaInicial,$fechaFinal);
+		static public function ctrEstadisticas($tabla, $date)
+		{
+			
+			$respuesta = puertaModelo::mdlEstadisticas($tabla,$date);
 
 			return $respuesta;
 
 		}
-		//fin del metodo de mostrar ventas por rango de fechas
+		//fin del metodo de mostrar estadisticas por rango de fechas
 
 	   /*=============================================
 		= BORRAR O ELIMINAR Puerta    =

@@ -112,7 +112,25 @@
 
 	// 	}
 
+		/*=============================================
+		=           MODAL ESTADISTICAS             =
+		=============================================*/
 		
+		public $date;
+
+		public function ajaxEstadisticasPuerta(){
+
+			$tabla = "estadisticas";
+
+			$date = $this->date;  
+
+		    $respuesta = PuertasControlador::ctrEstadisticas($tabla, $date);
+		    var_dump("y aqui... ",$respuesta);
+		    
+
+		}
+
+		/*============================================*/	
 	}
 
 /*=============================================
@@ -187,6 +205,20 @@ if (isset($_POST["estadoAlarma"])) {
 // 		$valUsuario -> ajaxValidarUsuario();
 //} 
 
+
+/*=============================================*/
+/*=============================================
+=             MODAL ESTADISTICAS          =
+=============================================*/
+if(ISSET($_POST['date'])){
+
+	$datosFecha = new ajaxPuertas();
+
+    $datosFecha -> date = $_POST['date'];
+    
+    $datosFecha -> ajaxEstadisticasPuerta();
+    
+}
 
 /*=============================================*/
 

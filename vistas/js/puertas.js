@@ -563,3 +563,35 @@ $(botonEstadoModal).click(function() {
 
 })
 
+/*=======  recargar estadisticas (puerta)  ========*/  
+$(document).on('click', '.datosEst', function() { 
+
+  //Obtenemos datos formulario.
+  // var date = $(this).attr("$date");
+  // var date = "<?php $date ?>"; 
+  const date = new Date();
+
+  var datos = new FormData();
+
+  datos.append("date",date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate());
+  
+
+  // AJAX.
+  $.ajax({  
+     url: 'ajax/puertas.ajax.php',
+     method: 'POST',
+     cache: false,
+     contentType: false,
+     processData: false,
+     data:  datos, 
+     dataType: 'json',
+     success:function(respuesta) {
+         $('.chart').html(respuesta).fadeIn();
+     }  
+  });
+  return false;
+})
+
+
+  /*=====  fin recargar estadisticas (puerta)  ======*/
+
