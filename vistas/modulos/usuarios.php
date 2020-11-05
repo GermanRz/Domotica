@@ -48,7 +48,7 @@
 
         <div class="card-body" style="background: #adb5bd;">
 
-          <table class="table table-dark table-striped table-hover dt-responsive tablas " style="width:100%">
+          <table class="table table-dark table-striped table-hover dt-responsive tablas" width="100%">
 
             <thead>
 
@@ -259,7 +259,7 @@
 
                   <div class="input-group-prepend">
 
-                    <span class="input-group-text"><i class="fas fa-users"></i></span>
+                    <select class="form-control input-lg" name="nuevoPerfil" required="">
 
                   </div>
 
@@ -437,9 +437,7 @@
 
                     <span class="input-group-text"><i class="fas fa-users"></i></span>
 
-                  </div>
-
-                  <select class="form-control input-lg"  name="editarPerfil">
+                    <select class="form-control input-lg"  name="editarPerfil" id="editarPerfil">
 
                     <option value="" id="editarPerfil"></option>
 

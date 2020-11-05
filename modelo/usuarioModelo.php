@@ -1,10 +1,7 @@
 <?php
 
-require_once "conexion.php";
+	include_once "conexion.php";
 
-/**    
- * 
- */
 class usuarioModelo
 {
 
@@ -42,6 +39,7 @@ class usuarioModelo
   {
 
     $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, usuario, password, perfil,foto) VALUES (:nombre, :usuario, :password, :perfil, :foto)");
+
 
     $stmt->bindparam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 
@@ -99,8 +97,7 @@ class usuarioModelo
     $stmt = null;
   }
 
-
-        /*=============================================
+  /*=============================================
         =            ACTUALIZAR USUARIO           =
         =============================================*/
   static public function mdlActualizarUsuarios($tabla, $item1, $valor1, $item2, $valor2)

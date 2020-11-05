@@ -67,6 +67,7 @@
                 '.$value["nombre"].'
               </td>
 
+              <!-- Temperatura -->
                 <td class="align-middle text-center">
                   <div class="d-flex justify-content-center">                
                   '.$value["temp"].'°C
@@ -87,9 +88,9 @@
                 </div>
                 <div class="d-flex justify-content-center">'; 
                   if ($value["estado_hum"] == 1) {
-                    echo '<button class="btn btn-success btn-xs" estadoHum="0">Activado</button>';
+                    echo '<button class="btn btn-success btn-xs btnActivarHum" idHumedad="'.$value["id"].'" estadoHum="0">Activado</button>';
                   }else{
-                    echo '<button class="btn btn-danger btn-xs" estadoHum="1">Desactivado</button>';
+                    echo '<button class="btn btn-danger btn-xs btnActivarHum" idHumedad="'.$value["id"].'" estadoHum="1">Desactivado</button>';
                   }echo'
                 </div>                              
               </td>
@@ -101,9 +102,9 @@
                 </div>
                 <div class="d-flex justify-content-center">'; 
                   if ($value["estado_tvo"] == 1) {
-                    echo '<button class="btn btn-success btn-xs" estadoTvo="0">Activado</button>';
+                    echo '<button class="btn btn-success btn-xs btnActivarTvo" idTvo="'.$value["id"].'" estadoTvo="0">Activado</button>';
                   }else{
-                    echo '<button class="btn btn-danger btn-xs" estadoTvo="1">Desactivado</button>';
+                    echo '<button class="btn btn-danger btn-xs btnActivarTvo" idTvo="'.$value["id"].'" estadoTvo="1">Desactivado</button>';
                   }echo'
                 </div>              
               </td>

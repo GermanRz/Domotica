@@ -43,12 +43,9 @@
 
 							$_SESSION["iniciarSesion"] = "ok";
 							$_SESSION["id"] = $respuesta["id"];
-							$_SESSION["nombre"] = $respuesta["nombre"];
 							$_SESSION["usuario"] = $respuesta["usuario"];
-							$_SESSION["foto"] = $respuesta["foto"];
-	                        $_SESSION["perfil"] = $respuesta["perfil"];
 
-	                        /*=============================================
+							/*=============================================
 							= REGISTRAR FECHA HASTA EL ULTIMO LOGIN    =
 							=============================================*/
 
@@ -118,6 +115,8 @@
 				}
 			}
 		}
+
+
 
 
 		/* ================================================================
@@ -285,6 +284,9 @@
 		
 		}
 
+
+
+
 		/* ================================================================
         		EDITAR USUARIOS
         ================================================================= */
@@ -398,10 +400,14 @@
 
 		                    	}
 
-	                    }
-						if (empty($encriptar)) {
-							$encriptar = $_POST['passwordActual'];
-						}
+	                    }	
+							//si no se realizo el cambio de contraseña
+							//se asignara la contraseña antigua
+							if (!isset($encriptar)) {
+
+								$encriptar = $_POST['passwordActual'];
+
+							}					
 
 							$datos = array("nombre" => $_POST["editarNombre"],
 				                    		"usuario" => $_POST["editarUsuario"],
@@ -426,15 +432,15 @@
 					                                          confirmButtonText: 'Ok',
 					                                          closeOnConfirm: false 
 
-		                                          }).then((result)=>{
+					                                          }).then((result)=>{
 
-		                                            if(result.value){
+					                                            if(result.value){
 
-		                                              window.location = 'usuarios';
-		                                            }      
-		                                        });
+					                                              window.location = 'usuarios';
+					                                            }      
+					                                        });
 
-		                              </script>";
+					                              </script>";
 
 							} 
 
@@ -528,6 +534,25 @@
 
 			}
 
+		}
+
+		/*=============================================
+		=             Actuazlizar sesion              =
+		=============================================*/
+		static public function ctrActualizarSession()
+		{	
+			//Actualiza todos los datos guardados en las variables de
+			//sesion si se realiza un cambio de actualiza al reiniciar
+			//la pagina, iniciar sesion y cerrar sesion
+			$tabla = "usuarios";
+			$item = "usuario";
+			$valor = $_SESSION["usuario"];
+
+			$respuesta = usuarioModelo::mdlMostrarUsuario($tabla, $item, $valor);
+
+			$_SESSION["nombre"] = $respuesta["nombre"];
+			$_SESSION["foto"] = $respuesta["foto"];
+            $_SESSION["perfil"] = $respuesta["perfil"];
 		}
 
 	}
