@@ -48,7 +48,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <input type="text" class="knob" value="30" data-fgColor="#3c8dbc">
+                <input type="text" class="knobT" value="30" data-fgColor="#3c8dbc">
                 <div class="knob-label text-primary">Temperatura y aire acondicionado</div>
                 <input type="checkbox" checked data-toggle="toggle" data-size="large" data-width="100">
               </div>
@@ -108,7 +108,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <input type="text" class="knob" data-readonly="true" value="30" data-fgColor="#3c8dbc">
+                <input type="text" class="knobH" data-readonly="true" value="30" data-fgColor="#3c8dbc">
                 <div class="knob-label text-primary">Humedad y humidificador</div>
                 <input type="checkbox" checked data-toggle="toggle" data-size="large" data-width="100">
               </div>
@@ -163,7 +163,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <input type="text" class="knob" data-readonly="true" value="30" data-fgColor="#3c8dbc">
+                <input type="text" class="knobG" data-readonly="true" value="30" data-fgColor="#3c8dbc">
                 <div class="knob-label text-primary">TVOC y Purificador</div>
                 <input type="checkbox" checked data-toggle="toggle" data-size="large" data-width="100">
               </div>
@@ -221,7 +221,6 @@
   }
 //---------
 
-
 ?>
 
 <script>
@@ -239,7 +238,7 @@
       ],          
       datasets: [{
         label: 'Temperatura en grados ºC',
-        backgroundColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(251, 154, 153)',
         borderColor: 'rgb(255, 99, 132)',
         data:[
           <?php
@@ -279,8 +278,8 @@
       ],   
       datasets: [{
         label: 'Tvoc en %',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(253, 191, 111)',
+        borderColor: 'rgb(255, 127, 0)',
         data: [
           <?php
             foreach($gases as $key => $value){
@@ -317,8 +316,8 @@
     ],
       datasets: [{
         label: 'Humedad en %',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgb(166, 206, 227)',
+        borderColor: 'rgb(31, 120, 180)',
         data: [
           <?php
             foreach($humedades as $key => $value){

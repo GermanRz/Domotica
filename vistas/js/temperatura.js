@@ -267,4 +267,12 @@ $("input[data-bootstrap-switch]").each(function(){
 	$(this).bootstrapSwitch('state', $(this).prop('checked'));
   });
 
-
+/*==============================
+   KnoB
+=============================*/
+// Temperatura
+	$('.knobT').knob();
+// Humedad
+	$('.knobH').knob();
+// Gas
+	$('.knobG').knob();	
