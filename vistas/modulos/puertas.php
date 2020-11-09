@@ -961,7 +961,7 @@ $borrarPuertas->ctrBorrarPuerta();
 =     Estadisticas puertas            =
 ============================================-->
 <?php
-  
+  $pruebaFechas = array();
   $arrayFechas = array();
   $arrayAlarmas = array();
   $arrayAlarmasAct = array();
@@ -970,36 +970,73 @@ $borrarPuertas->ctrBorrarPuerta();
   $arraySensorBlock = array();
   $arraySensorBlockDes = array();
   $arraySensorSinBlock = array();
+  $fechacoincide = 0;
+
+  $pruebaAlarmas = array();
+  $pruebaSensores = array();
     
     $tabla = "estadisticas";
     $date = date("Y-m-d");
     $respuestaFechas = PuertasControlador::ctrEstadisticas($tabla,$date);
 
-    foreach ($respuestaFechas as $key => $value) {
-      $fechas=$value["fechas"];
-      $alarma=$value["alarmas"];
-      $sensor=$value["sensorBloqueo"];
-      array_push($arrayFechas, $fechas);
-      if ($alarma == 1) {
-        array_push($arrayAlarmasAct,$alarma);
-      }else if($alarma == 2){
-        array_push($arrayAlarmasDes,$alarma);
-      }else{
-        array_push($arraySinAlarmas,$alarma);
-      }
-    }
+  
 
     foreach ($respuestaFechas as $key => $value) {
       $fechas=$value["fechas"];
-      $sensor=$value["sensorBloqueo"];
-      array_push($arrayFechas, $fechas);
-      if ($sensor == 1) {
-        array_push($arraySensorBlock,$sensor);
-      }else if($sensor == 2){
-        array_push($arraySensorBlockDes,$sensor);
-      }else{
-        array_push($arraySensorSinBlock,$sensor);
+      // var_dump($fechas);
+      $alarma=$value["alarmas"];
+      array_push($pruebaFechas, $fechas);
+      array_push($pruebaAlarmas,$alarma);
+      
+      foreach($pruebaAlarmas as $pruebaAlarma) {
+
+        if ($pruebaAlarma == 2) {
+          array_push($arrayAlarmasAct,$pruebaAlarma);
+        }else if($pruebaAlarma == 3){
+          array_push($arrayAlarmasDes,$pruebaAlarma);
+        }else{
+          array_push($arraySinAlarmas,$pruebaAlarma);
+        }
       }
+      
+    }
+
+    foreach ($pruebaFechas as $pruebaFecha) {
+      foreach ($arrayFechas as $arrayFecha) {
+        if($arrayFecha == $pruebaFecha) {
+          $fechacoincide = 1;
+        }
+        
+      }
+      if($fechacoincide == 0) {
+        array_push($arrayFechas, $pruebaFecha);
+      }else {
+        $fechacoincide = 0;
+      }
+    }
+
+    
+      
+
+      
+    
+
+    foreach ($respuestaFechas as $key => $value) {
+      $sensor=$value["sensorBloqueo"];
+
+      array_push($pruebaSensores,$sensor);
+
+      foreach($pruebaSensores as $pruebaSensor) {
+
+        if ($pruebaSensor == 2) {
+          array_push($arraySensorBlock,$pruebaSensor);
+        }else if($pruebaSensor == 3){
+          array_push($arraySensorBlockDes,$pruebaSensor);
+        }else{
+          array_push($arraySensorSinBlock,$pruebaSensor);
+        }
+      }
+     
     }
 
   
@@ -1069,7 +1106,7 @@ $borrarPuertas->ctrBorrarPuerta();
         },
         {
           label: "Sin alarma",
-          backgroundColor: "rgba(128, 128, 128, 0.5)",
+          backgroundColor: "rgba(255, 255, 255, 0.5)",
           borderColor: "rgba(128, 128, 128, 0.5)",
           pointRadius: false,
           pointColor: "rgba(128, 128, 128, 0.5)",
