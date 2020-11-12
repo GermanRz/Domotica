@@ -1,18 +1,42 @@
-<?php 
+<?php
 
-  session_start();
+session_start();
 
- ?>
+?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
-  
+
   <meta charset="utf-8">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title><?php echo $_GET["vista"]; ?></title>
+  <title><?php 
+
+      if (isset($_SESSION["iniciarSesion"]) 
+          && $_SESSION["iniciarSesion"] == "ok") {
+          if (isset($_GET["vista"])) {
+
+              $cadena_devuelta = ucfirst($_GET["vista"]);//Asigna la primera letra en mayuscula
+              
+              //$resultado2 = str_replace("-", " ", $cadena_devuelta);
+
+              echo $cadena_devuelta." - Domotica";
+
+          }else{
+          //si no existe una ruta se le asigna un nombre a la pagina
+
+              echo 'Inicio - Domotica';
+
+          }
+      }else{
+        echo 'Login - Domotica';
+      }
+    ?>
+      
+  </title>
 
   <link rel="icon" href="images/icons/casa.png">
 
@@ -39,25 +63,19 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="vistas/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="vistas/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="vistas/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="vistas/plugins/daterangepicker/daterangepicker.css">
-  
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="vistas/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- sweetalert 2 theme dark -->
+  <!-- <link rel="stylesheet" href="@sweetalert2/theme-dark/dark.css"> -->
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="vistas/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-  
   <!-- Daterange picker -->
   <link rel="stylesheet" href="vistas/plugins/daterangepicker/daterangepicker.css">
-
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="vistas/plugins/morris.js/morris.css">
-
-  <!--================================
-    PLUGINS DE JAVASCRIPT
-  =================================-->
+  
+  <!-- Selected2 -->
+  <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
+  <!-- customs CSS -->
+  <link rel="stylesheet" href="css/ventanas.css">
 
   <!-- jQuery -->
   <script src="vistas/plugins/jquery/jquery.min.js"></script>
@@ -127,76 +145,110 @@
 
 
 
+  <!-- OPTIONAL SCRIPTS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
+  <script src="vistas/dist/js/demo.js"></script>
+  <script src="vistas/dist/js/pages/dashboard3.js"></script>
+
+  <!-- jquery flot -->
+  <script src="vistas/plugins/flot/jquery.flot.js"></script>
+  <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+  <script src="vistas/plugins/flot-old/jquery.flot.resize.min.js"></script>
+  <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+  <script src="vistas/plugins/flot-old/jquery.flot.pie.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="vistas/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="vistas/plugins/moment/moment.min.js"></script>
+  <script src="vistas/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Summernote -->
+  <script src="vistas/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- Selected2 -->
+  <script src="vistas/plugins/select2/js/select2.full.min.js"></script>
 
 
 </head>
 
 <body class="hold-transition sidebar-mini">
-<!-- Site wrapper -->
+  <!-- Site wrapper -->
 
 
-<?php 
+  <?php
 
 if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok") {
-  
+
+  //Llama a un controlador que actualiza las variables de sesión
+  $editarSession = new usuariosControlador();
+  $editarSession -> ctrActualizarSession();
   
   echo '<div class="wrapper">';
 
-     /*=============================================
-     =            CABEZOTE            =
-     =============================================*/
-        include "vistas/modulos/cabezote.php";
 
-     /*=============================================
-     =            MENU           =
-     =============================================*/
-        include "vistas/modulos/menu.php";
+    echo '<div class="wrapper">';
 
-     /*=============================================
-     =            CONTENIDO            =
-     =============================================*/
-        if (isset($_GET["vista"])) {
+    /*=============================================
+       =            CABEZOTE            =
+       =============================================*/
+    include "vistas/modulos/cabezote.php";
 
-            if ($_GET["vista"] == "inicio"||
-                $_GET["vista"] == "usuarios"||
-                $_GET["vista"] == "serviciosPublicos"||
-                $_GET["vista"] == "temperatura"||
-                $_GET["vista"] == "puertas"||
-                $_GET["vista"] == "ventanas"||
-                $_GET["vista"] == "salir"||
-                $_GET["vista"] == "iluminacion") {
-              
-              include 'vistas/modulos/'.$_GET["vista"].'.php';
+    /*=============================================
+       =            MENU           =
+       =============================================*/
+    include "vistas/modulos/menu.php";
 
+    /*=============================================
+       =            CONTENIDO            =
+       =============================================*/
+    if (isset($_GET["vista"])) {
 
-            }else{
+      if (
+        $_GET["vista"] == "inicio" ||
+        $_GET["vista"] == "usuarios" ||
+        $_GET["vista"] == "serviciosPublicos" ||
+        $_GET["vista"] == "temperatura" ||
+        $_GET["vista"] == "puertas" ||
+        $_GET["vista"] == "ventanas" ||
+        $_GET["vista"] == "salir" ||
+        $_GET["vista"] == "iluminacion" ||
+        $_GET["vista"] == "reportes"
+      ) {
 
-              include 'vistas/modulos/404.php';
-            }
-        }
+        include 'vistas/modulos/' . $_GET["vista"] . '.php';
+      } else {
 
-
-     /*=============================================
-     =            FOOTER           =
-     =============================================*/
-        include "vistas/modulos/footer.php";
-
-  echo '</div>';
-
-}else{
-
-  include "vistas/modulos/login.php";
-
-}
+        include 'vistas/modulos/404.php';
+      }
+    }
 
 
-?>
+    /*=============================================
+       =            FOOTER           =
+       =============================================*/
+    include "vistas/modulos/footer.php";
+
+    echo '</div>';
+  } else {
+
+    include "vistas/modulos/login.php";
+  }
+
+  if (isset($_GET["vista"])) {
+    if ($_GET["vista"] == "serviciosPublicos") {
+
+      echo '<script src="./vistas/js/serviciosP.js"></script>';
+    }
+  }
 
 
 
-<script src="./vistas/js/puertas.js"></script>
-<script src="./vistas/js/usuario.js"></script>
+  ?>
+
+  <script src="./vistas/js/puertas.js"></script>
+  <script src="./vistas/js/iluminacion.js"></script>
+  <script src="./vistas/js/plantilla.js"></script>
+  <script src="./vistas/js/usuario.js"></script>
+  <script src="./vistas/js/ventana.js"></script>
 <!-- <script src="./vistas/js/serviciosP.js"></script> -->
-
 </body>
+
 </html>
