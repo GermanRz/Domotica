@@ -64,6 +64,8 @@ session_start();
   <!-- <link rel="stylesheet" href="@sweetalert2/theme-dark/dark.css"> -->
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="vistas/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="vistas/plugins/daterangepicker/daterangepicker.css">
   
   <!-- Selected2 -->
   <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
@@ -88,25 +90,27 @@ session_start();
   <script src="vistas/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="vistas/plugins/sweetalert2/sweetalert2.min.js"></script>
-  <!-- sweetalert 2 theme dark -->
-  <!-- <script src="sweetalert2/dist/sweetalert2.min.js"></script> -->
-
-
   <!-- bootstrap color picker -->
   <script src="vistas/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
   <!-- OPTIONAL SCRIPTS -->
-  <script src="vistas/plugins/chart.js/Chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
   <script src="vistas/dist/js/demo.js"></script>
   <script src="vistas/dist/js/pages/dashboard3.js"></script>
 
   <!-- jquery flot -->
-  <!-- <script src="vistas/plugins/flot/jquery.flot.js"></script> -->
+  <script src="vistas/plugins/flot/jquery.flot.js"></script>
   <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-  <!-- <script src="vistas/plugins/flot-old/jquery.flot.resize.min.js"></script> -->
+  <script src="vistas/plugins/flot-old/jquery.flot.resize.min.js"></script>
   <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-  <!-- <script src="vistas/plugins/flot-old/jquery.flot.pie.min.js"></script> -->
-
+  <script src="vistas/plugins/flot-old/jquery.flot.pie.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="vistas/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="vistas/plugins/moment/moment.min.js"></script>
+  <script src="vistas/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Summernote -->
+  <script src="vistas/plugins/summernote/summernote-bs4.min.js"></script>
   <!-- Selected2 -->
   <script src="vistas/plugins/select2/js/select2.full.min.js"></script>
 
@@ -150,7 +154,8 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok") {
         $_GET["vista"] == "puertas" ||
         $_GET["vista"] == "ventanas" ||
         $_GET["vista"] == "salir" ||
-        $_GET["vista"] == "iluminacion"
+        $_GET["vista"] == "iluminacion" ||
+        $_GET["vista"] == "reportes"
       ) {
 
         include 'vistas/modulos/' . $_GET["vista"] . '.php';
