@@ -176,14 +176,13 @@
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <select class="form-control input-lg" name="nuevoPerfil" required="">
+                  <select class="form-control input-lg" name="nuevoPerfil">
+                    <option value="">Selecionar Perfil</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Permanente">usuario</option>
+                    <option value="Invitado">Invitado</option>
+                  </select>
                 </div>
-                <select class="form-control input-lg" name="nuevoPerfil">
-                  <option value="">Selecionar Perfil</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Permanente">usuario</option>
-                  <option value="Invitado">Invitado</option>
-                </select>
               </div>
             </div>
           </div>
