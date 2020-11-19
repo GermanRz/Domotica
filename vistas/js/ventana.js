@@ -165,10 +165,9 @@ $("#rangoFechas").change(function(){
         processData: false,
         dataType: 'json',
         success: function (respuesta) {
-
+            $('#barChart').remove(); // this is my <canvas> element 
+            $('.chart').append('<canvas id="barChart" style="min-height: 350px; height: 350px; max-height: 100%; max-width: 100%;" ></canvas>');
             crearGrafica(respuesta[0], respuesta[1], rangoFechas);
-
-
         }
     });
 
