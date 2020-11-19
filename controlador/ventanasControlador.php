@@ -19,11 +19,12 @@ class ventanasControlador
 
 
     // INICIO del metodo para traer el historico de ventanas 
-    static public function ctrHistoricoVentanas($item, $valor,$item2, $valor2 )
+    static public function ctrHistoricoVentanas($item, $valor,$item2, $valor2,$item3, $valor3, $valor4)
     {
 
         $tabla = "registro_ventana_limpieza";
-        $respuesta = ventanaModelo::mdlHistoricoVentanas($tabla, $item, $valor, $item2, $valor2);
+        $respuesta = ventanaModelo::mdlHistoricoVentanas($tabla, $item, $valor, $item2, $valor2,
+                     $item3, $valor3, $valor4);
         return $respuesta;
     } // FIN del metodo para traer el historico de ventanas 
 
@@ -37,20 +38,19 @@ class ventanasControlador
     {
 
         if (isset($_POST["limpiezaVentana"])) {
-            $numero = "5";
-            $hora = "2020-10-08 10:32:24";
+            date_default_timezone_set('America/Bogota');
+            $fecha = date('Y-m-d');
+            $hora = date('H:i:s');
+            $fecha = $fecha.' '.$hora;
             $tabla = "registro_ventana_limpieza";
 
             $datos = array(
                 "id_ventana" => $_POST['limpiezaVentana'],
-                "consumo_agua" => $numero,
+                "cantidad" => 1,
                 "tipo_limpieza" => $_POST['tipo_limpieza'],
-                "fecha_inicio" => $hora,
-                "fecha_final" => $hora,
-                "duracion" => $numero
-            );
+                "fecha" => $fecha
+            );      
 
-            
 
             $respuesta = ventanaModelo::mdlCrearHistoricoVentana($tabla, $datos);
 
@@ -62,7 +62,7 @@ class ventanasControlador
             Swal.fire({
 
                 type: 'success',
-                html: '<h3 class=" . $color . "> ¡Ventana añadida correctamente! </h3>',
+                html: '<h3 class=" . $color . "> ¡Limpieza manual añadida correctamente! </h3>',
                 background: '#343a40',
                 showConfirmButton: true,
                 confirmButtonColor: '#28a745',

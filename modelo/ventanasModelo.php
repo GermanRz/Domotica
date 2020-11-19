@@ -110,14 +110,18 @@ class ventanaModelo
     }
 
     //METODO PARA TRAER EL HISTORICO DE VENTANAS
-    static public function mdlHistoricoVentanas($tabla, $item, $valor, $item2, $valor2)
+    static public function mdlHistoricoVentanas($tabla, $item, $valor, $item2, $valor2, $item3,       $valor3, $valor4)
     {
-        if ($item != null AND $item2 != null) {
+        if ($item != null AND $item2 != null AND $item3 != null) {
 
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND 
-                                                  $item2 = :$item2");
+            $stmt = Conexion::conectar()->prepare("SELECT SUM(cantidad) AS cantidadTotal, $tabla.*  
+                 FROM $tabla WHERE $item LIKE :$item AND $item2 = :$item2 AND DATE($item3) BETWEEN
+                  :inicio and :fin"); 
+                                            
             $stmt->bindparam(":" . $item, $valor, PDO::PARAM_STR);
             $stmt->bindparam(":" . $item2, $valor2, PDO::PARAM_STR);
+            $stmt->bindValue(":inicio",$valor3);
+            $stmt->bindValue(":fin",$valor4);
             $stmt->execute();
 
 
@@ -172,28 +176,25 @@ class ventanaModelo
     {
         
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_ventana, 
-            consumo_agua, tipo_limpieza,fecha_inicio,fecha_final,duracion) VALUES 
-            (:id_ventana, :consumo_agua, :tipo_limpieza, :fecha_inicio,:fecha_final,:duracion)");
+            cantidad, tipo_limpieza, fecha) VALUES 
+            (:id_ventana, :cantidad, :tipo_limpieza, :fecha)");
 
+        var_dump($datos);
 
         $stmt->bindparam(":id_ventana", $datos["id_ventana"], PDO::PARAM_STR);
 
-        $stmt->bindparam(":consumo_agua", $datos["consumo_agua"], PDO::PARAM_STR);
+        $stmt->bindparam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
 
         $stmt->bindparam(":tipo_limpieza", $datos["tipo_limpieza"], PDO::PARAM_STR);
 
-        $stmt->bindparam(":fecha_inicio", $datos["fecha_inicio"], PDO::PARAM_STR);
-
-        $stmt->bindparam(":fecha_final", $datos["fecha_final"], PDO::PARAM_STR);
-
-        $stmt->bindparam(":duracion", $datos["duracion"], PDO::PARAM_STR);
+        $stmt->bindparam(":fecha",$datos["fecha"], PDO::PARAM_STR);
 
 
         if ($stmt->execute()) {
-
+            var_dump("if");
             return "ok";
         } else {
-
+            var_dump("else");
             return "error";
         }
 

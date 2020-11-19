@@ -89,6 +89,9 @@ $('#modalEditarVentana').on('hidden.bs.modal', function () {
     }
 });
 
+
+
+
 /*=============================================
 =    VALIDA EL FORMATO DE LA IMAGEN           =
 =============================================*/
@@ -145,6 +148,107 @@ $(".nuevaFoto").change(function(){
 		});
 	}
 })
+
+$("#rangoFechas").change(function(){
+
+    var rangoFechas = document.getElementById('rangoFechas').value;
+
+    var datos = new FormData();
+    datos.append("rangoFechas", rangoFechas);
+    $.ajax({
+
+        url: 'ajax/ventana.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (respuesta) {
+
+            crearGrafica(respuesta[0], respuesta[1], rangoFechas);
+
+
+        }
+    });
+
+})
+
+
+function crearGrafica(cantidad1, cantidad2, fechas){
+
+
+    var areaChartData = {
+      labels  : [
+        fechas
+      ],
+      datasets: [
+        {
+          label               : 'Limpieza Suave',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+
+          data                : [
+            cantidad1
+
+          ]
+        },
+        {
+          label               : 'Limpiza Profunda',
+          backgroundColor     : 'rgba(210, 214, 222, 1)',
+          borderColor         : 'rgba(210, 214, 222, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(210, 214, 222, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data                : [
+            cantidad2
+
+          ]
+        },
+      ]
+    }
+    
+    
+
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = jQuery.extend(true, {}, areaChartData)
+    var temp0 = areaChartData.datasets[0]
+    var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp0
+    barChartData.datasets[1] = temp1
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar', 
+      data: barChartData,
+      options: barChartOptions
+    })
+
+    areaChartData.update();
+}
 
 /*=============================================
 =            EDITAR Ventana            =

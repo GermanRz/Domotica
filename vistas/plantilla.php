@@ -70,17 +70,22 @@ session_start();
   <!-- customs CSS -->
   <link rel="stylesheet" href="css/ventanas.css">
 
+   <!-- daterange picker -->
+  <link rel="stylesheet" href="vistas/plugins/daterangepicker/daterangepicker.css">
+
   <!-- =============================================================
           JS
   ============================================================= -->
   <!-- jQuery -->
   <script src="vistas/plugins/jquery/jquery.min.js"></script>
+  <script src="vistas/plugins/moment/moment.min.js"></script>
+  <!-- date-range-picker -->
+  <script src="vistas/plugins/daterangepicker/daterangepicker.js"></script>
   <!-- Bootstrap 4 -->
   <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="vistas/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="vistas/dist/js/demo.js"></script>
+
   <!-- DataTables -->
   <script src="vistas/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="vistas/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -88,10 +93,6 @@ session_start();
   <script src="vistas/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
   <!-- SweetAlert2 -->
   <script src="vistas/plugins/sweetalert2/sweetalert2.min.js"></script>
-  <!-- sweetalert 2 theme dark -->
-  <!-- <script src="sweetalert2/dist/sweetalert2.min.js"></script> -->
-
-  
 
 
   <!-- bootstrap color picker -->
@@ -100,7 +101,6 @@ session_start();
   <!-- OPTIONAL SCRIPTS -->
   <script src="vistas/plugins/chart.js/Chart.js"></script>
   <!-- ChartJS -->
-  <script src="./vistas/js/GraficasVentanas.js"></script>
   <script src="vistas/dist/js/demo.js"></script>
   <script src="vistas/dist/js/pages/dashboard3.js"></script>
 
@@ -113,6 +113,7 @@ session_start();
 
   <!-- Selected2 -->
   <script src="vistas/plugins/select2/js/select2.full.min.js"></script>
+  
 
 
 </head>
