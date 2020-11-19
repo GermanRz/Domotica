@@ -45,7 +45,7 @@
                       </span>
                     </div>
                     <input type="text" class="form-control float-right" id="rangoFechas"
-                    name = "rangoFechas">
+                    name = "rangoFechas" locale="es">
 
                   </div>
                   <!-- /.input group -->
@@ -75,7 +75,46 @@
  $(function () {
   //Date range picker
     $cantidadSuave =  $(this).attr("cantidad1");
-    $('#rangoFechas').daterangepicker()
+    $('#rangoFechas').daterangepicker();
+
+    $('#rangoFechas').daterangepicker({
+        "locale": {
+            "format": "YYYY-MM-DD",
+            "separator": " - ",
+            "applyLabel": "Guardar",
+            "cancelLabel": "Cancelar",
+            "fromLabel": "Desde",
+            "toLabel": "Hasta",
+            "customRangeLabel": "Personalizar",
+            "daysOfWeek": [
+                "Do",
+                "Lu",
+                "Ma",
+                "Mi",
+                "Ju",
+                "Vi",
+                "Sa"
+            ],
+            "monthNames": [
+                "Enero",
+                "Febrero",
+                "Marzo",
+                "Abril",
+                "Mayo",
+                "Junio",
+                "Julio",
+                "Agosto",
+                "Setiembre",
+                "Octubre",
+                "Noviembre",
+                "Diciembre"
+            ],
+            "firstDay": 1
+        },
+        "startDate": "2016-01-01",
+        "endDate": "2016-01-07",
+        "opens": "center"
+    });
 
    
   })
